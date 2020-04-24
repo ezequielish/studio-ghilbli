@@ -51,9 +51,6 @@ export default {
   data: () => ({
   }),
   methods: ({
-   messageConsole(msg){
-      console.log(msg);
-  },
   handleText(text){
       const textLength = text.length;
       if(textLength > 250){
@@ -74,9 +71,7 @@ export default {
     ...mapState('filmsStore',['films', 'loading_films', 'error']),
   },
 
-  created(){
-    console.log('LAI',this.films);
-    
+  created(){   
     if(!this.films.length){
       this.getAllFilmsApi()
     }    
@@ -91,11 +86,14 @@ export default {
 <style scoped>
 
 #container-movies{
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 15px;
-  padding: 25px;
-
+  padding: 25px; */
+  display: grid;
+  justify-content: center;
+  grid-gap: 15px;
+  padding: 15px;
 }
 
 h3 {

@@ -1,15 +1,3 @@
-/**
- * ¿Qué son los módulos en vuex?
- * 
- * Los módulos son una forma ordenada de tener nuestro store separado 
- * es decir digamos que tenemos un módulo solo para la autenticación, otro para las movies, otro para los usuarios, etc.
- * 
- * Lo que debemos hacer es crear la propiedad **modules** en nuestro archivo store.js y allí colocar todos nuestro módulos.
- * 
- * A la hora de crear un módulo es importante agregarle la propiedad **namespaced** esto nos ayudara a su implementación desde
- * los componentes, la propiedad namespaced es un boolan que definimos en true
- * 
- */
 
  import { GET_ALL_FILMS, FILMS_LOADING, LIKE_MOVIE, FILMS_ERROR } from '../types/fimlsTypes'
  const URL_ALL_MOVIES = "https://ghibliapi.herokuapp.com/films/";
