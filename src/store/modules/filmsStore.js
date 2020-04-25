@@ -1,5 +1,5 @@
 
- import { GET_ALL_FILMS, FILMS_LOADING, LIKE_MOVIE, FILMS_ERROR } from '../types/fimlsTypes'
+ import { GET_ALL_FILMS, FILMS_LOADING, LIKE_MOVIE, FILMS_ERROR, INPUT_SEARCH } from '../types/fimlsTypes'
  const URL_ALL_MOVIES = "https://ghibliapi.herokuapp.com/films/";
  
 
@@ -9,6 +9,8 @@ const store = {
     state: {
         films: [],      
         movieSelected: {},
+        search_movie: '',
+        loading_search: false,
         loading_films: false,
         error: ''
     },
@@ -32,10 +34,26 @@ const store = {
       FILMS_ERROR(state, payload){
           state.error = payload
       },
+
+      INPUT_SEARCH(state, payload){
+          state.search_movie = payload
+      }
     },
     getters: {
         getMovieState: state => id => {
           state.movieSelected = state.films.filter(film => film.id == id )[0]          
+        },
+        getMovieSearchState: state => value => {
+          let expresion = new RegExp(`${value}.*`, "i");
+          let moviesFilter = state.films.filter(film => expresion.test(film.title))
+          let movieFive = []
+          if(moviesFilter.length > 4){
+              moviesFilter.map(film => {
+                  movieFive.push(film)
+              })
+              return movieFive
+          }
+          return moviesFilter
         }
     },
     actions: {
@@ -66,6 +84,9 @@ const store = {
             }
           })        
           return filmFavs
+        },
+        changeValueSearch({commit}, value){
+            commit(INPUT_SEARCH, value)
         }
     },
 }

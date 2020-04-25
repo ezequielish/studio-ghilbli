@@ -2,7 +2,7 @@
     <header>
         <div id="container-search">
             <img src="../assets/studig.png" id="logo" alt="logo">
-            <input type="text" placeholder="Search movie" />
+            <input type="text" :value="search_movie" @keydown="handleChangeSearch()" placeholder="Search movie" />
             <img @click="handleMenu" class="icon-menu" src="../assets/menu-24px.svg" alt="icon open">
         </div>
         <nav :class="{'menu-open': menuHandle}"> 
@@ -38,6 +38,7 @@
 
 
 <script>
+import { mapState } from 'vuex'
 export default {
     name: "Header",
     data: () => ({
@@ -47,8 +48,21 @@ export default {
         handleMenu(){
             this.menuHandle = !this.menuHandle
         },
+        handleChangeSearch: function(){
+            console.log(this.valueSearch);
+        }
+    },
+
+    computed: {
+        ...mapState('filmsStore',['search_movie', 'loading_search']),
+    },
+
+    mounted(){
+        
+        setTimeout(() => {
+            this.$store.filmsStore.dispatch('filmsStore/changeValueSearch', 'HOLAA')
+        }, 5000);
     }
-    
 }
 </script>
 
