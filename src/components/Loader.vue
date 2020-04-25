@@ -99,6 +99,11 @@ export default {
     transform: rotate(360deg);
   }
 }
+@media (min-width: 700px) {
+  .lds-roller{
+      align-self: center;
+  }
 
+}
 </style>
 

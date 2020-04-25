@@ -1,12 +1,13 @@
 <template>
-    <header v-bind:class="{'menu-open': menuHandle}">
+    <header>
         <div id="container-search">
-            <img src="../assets/studig.png" alt="logo">
-            <input type="text" />
+            <img src="../assets/studig.png" id="logo" alt="logo">
+            <input type="text" placeholder="Search movie" />
+            <img @click="handleMenu" class="icon-menu" src="../assets/menu-24px.svg" alt="icon open">
         </div>
-        <nav> 
+        <nav :class="{'menu-open': menuHandle}"> 
             <div id="profile-info">
-                <img id="icon-close-menu" src="../assets/close-24px.svg" alt="icon close">
+                <img @click="handleMenu" class="icon-menu" src="../assets/close-24px.svg" alt="icon close">
                 <figure>
                     <img src="../assets/profile.jpg" alt="profile image">
                 </figure>
@@ -17,13 +18,18 @@
             <!-- <figure>
                 <img src="../assets/studig.png" alt="photo app">
             </figure> -->
-             <router-link to='/'>
-                <img src="../assets/incon-nav-home.svg" alt="icon">
-                Home
+             <router-link to='/' >
+                <div @click="handleMenu">
+                    <img  src="../assets/incon-nav-home.svg" alt="icon">
+                    Home
+                </div>
             </router-link>
             <router-link to='/favorites'>
-                <img src="../assets/icon-nav-favorite.svg" alt="icon">
-                Favorites
+                <div @click="handleMenu">
+                    <img src="../assets/icon-nav-favorite.svg" alt="icon">
+                    Favorites   
+                </div>
+           
             </router-link>
         </nav>
     </header>
@@ -35,23 +41,20 @@
 export default {
     name: "Header",
     data: () => ({
-        menuHandle: true
+        menuHandle: false
     }),
-    mounted(){
-        setTimeout(() => {
-            this.menuHandle = true
-        }, 3000);
+    methods: {
+        handleMenu(){
+            this.menuHandle = !this.menuHandle
+        },
     }
+    
 }
 </script>
 
 <style  scoped>
     header{
-        height: 100vh;
-        /* display: grid;
-        grid-template-rows: 10% 90%; */
-      
-        
+
         width: 100%;
         transform: translateX(0%);
         transition: transform .6s;
@@ -64,13 +67,14 @@ export default {
         padding: 8px;
 
     }
-    #container-search img{
+    #container-search #logo{
         width: 80px;
         border-radius: 5px;
         margin-bottom: 8px;
     }
     #container-search input{
         margin-left: 8px;
+        outline: none;
     }
     nav{
         position: absolute;
@@ -79,6 +83,7 @@ export default {
         display: flex;
         align-items: flex-start;
         flex-direction: column;
+        transition: transform .6s;
         /* margin-top: 50px; */
         width: 100%;
         height: 100vh;
@@ -88,6 +93,10 @@ export default {
     }
 
     nav a{
+        color: whitesmoke;
+        text-decoration: none;
+    }
+    nav a div{
         padding: 8px;
         color: whitesmoke;
         text-decoration: none;
@@ -99,12 +108,13 @@ export default {
         padding: 8px;
         display: flex;
     }
-    #profile-info #icon-close-menu{
+    .icon-menu{
         position: absolute;
         right: 0;
         top: 0;
         padding: 15px;
         cursor: pointer;
+        width: 25px;
     }
     #profile-info p{
         margin-left: 8px;
@@ -125,5 +135,57 @@ export default {
  
     .menu-open{
         transform: translateX(0);
+    }
+
+    @media (min-width: 700px) { 
+        nav{
+            background-color: #0093E9;
+            background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 100%);
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+            transform: none;
+            position: fixed;
+            width: 15%;
+            /* display: none; */
+            
+        }
+        #profile-info{
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            padding: 0;
+        }
+        .icon-menu{
+            display: none;
+        }
+
+        #container-search{
+            flex-direction: row;
+            justify-content: center;
+
+        }
+        #container-search input{
+            width: 50%;
+            height: 25px;
+
+        }   
+        nav a {
+            width: 100%;
+        } 
+        nav a div{
+            width: 100%;
+            padding: 0;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+        } 
+        nav a.router-link-exact-active::before{
+            content: '▪';
+            color: navy;
+            width: 15px;
+ 
+        }
     }
 </style>

@@ -81,9 +81,32 @@ export default {
 <style  scoped>
 #container-movies{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
   grid-gap: 15px;
-  padding: 25px;
+  padding: 15px;
+  /* grid-template-columns: repeat(4, 1fr); */
+}
+@media (min-width: 700px) {
+  section{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  section h1{
+    align-self: center;
+  }
+  #container-movies{
+    width: 100%;
+    grid-template-columns: repeat(2,1fr); 
+    width: 80%;
+    overflow-y: scroll;
+  } 
 
+}
+@media (min-width: 1300px) { 
+  #container-movies{
+    grid-template-columns: repeat(3,1fr); 
+
+  } 
 }
 </style>

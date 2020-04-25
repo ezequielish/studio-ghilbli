@@ -71,6 +71,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.frame-movie{
+    margin-bottom: 15px;
+}
 .frame-movie a{
     text-decoration: none;
     color: #2d3e4f;

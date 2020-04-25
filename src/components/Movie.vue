@@ -74,10 +74,24 @@ export default {
         flex-direction: column;
         align-items: center;
     }
-    #card{
+    #card p {
+        text-align: justify;
+        padding: 10px;
+        line-height : 25px;
+
+    }
+
+    #card div:last-child p{
+        text-align: left;
+        margin: 0;
+    }
+
+
+@media (min-width: 700px) { 
+  #card{
         display: grid;
         grid-template-columns: 70% 30%;
-        width: 80%;
+        width: 70%;
     }
     #card div:first-child{
         display: flex;
@@ -93,6 +107,6 @@ export default {
         flex-direction: column;
         align-items: flex-start;
         padding: 15px;
-    }
-
+    } 
+}
 </style>
