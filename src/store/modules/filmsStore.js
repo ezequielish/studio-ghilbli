@@ -36,8 +36,11 @@ const store = {
       },
 
       INPUT_SEARCH(state, payload){
+          state.loading_search = true
           state.search_movie = payload
-      }
+          state.loading_search = false
+      },
+
     },
     getters: {
         getMovieState: state => id => {
@@ -47,13 +50,14 @@ const store = {
           let expresion = new RegExp(`${value}.*`, "i");
           let moviesFilter = state.films.filter(film => expresion.test(film.title))
           let movieFive = []
-          if(moviesFilter.length > 4){
-              moviesFilter.map(film => {
-                  movieFive.push(film)
+              moviesFilter.map((film, i) => {
+                  if(i < 5){
+                     movieFive.push(film)
+                  }
+                 
               })
               return movieFive
-          }
-          return moviesFilter
+    
         }
     },
     actions: {

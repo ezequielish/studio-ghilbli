@@ -63,7 +63,15 @@ export default {
     },
     destroyed(){
       this.$store.commit(`filmsStore/${FILMS_ERROR}`, '')
-  }
+    },
+    watch: {
+        "$route.params.id": function(){
+            if(this.$router.app._route.name == 'movie'){
+                this.$store.getters['filmsStore/getMovieState'](this.$route.params.id)  
+            }
+             
+        },
+    }
     
 }
 </script>
