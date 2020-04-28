@@ -22,7 +22,12 @@ export default new Router({
             path: '/movie/:id',
             name: 'movie',
             component: () => import('./components/Movie.vue')
-        }
+        },
+        {
+            path: '*',
+            name: 'pagenotfound',
+            component: () => import('./components/PageNotFound.vue')
+        },
     ]
 
 })
