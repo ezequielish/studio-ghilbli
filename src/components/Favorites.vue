@@ -24,12 +24,12 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import { FILMS_ERROR } from '../store/types/fimlsTypes'
-import Loader from './Loader'
-import MovieCard from './MovieCard'
+import { mapActions, mapState } from "vuex"
+import { FILMS_ERROR } from "../store/types/fimlsTypes"
+import Loader from "./Loader"
+import MovieCard from "./MovieCard"
 export default {
-  name: 'Favorites',
+  name: "Favorites",
   components: {
     Loader,
     MovieCard
@@ -38,14 +38,14 @@ export default {
       favs: []
   }),
   computed: {
-    ...mapState('filmsStore',['films', 'loading_films', 'error']),
+    ...mapState("filmsStore",["films", "loading_films", "error"]),
   },
   methods: {
-    ...mapActions('filmsStore',['moviesILike','getAllFilmsApi', 'likedMovie']),
+    ...mapActions("filmsStore",["moviesILike","getAllFilmsApi", "likedMovie"]),
      handleText(text){
       const textLength = text.length;
       if(textLength > 250){
-        const newText = text.slice(0,250).concat('...')
+        const newText = text.slice(0,250).concat("...")
         return newText
       }
       return text
@@ -72,7 +72,7 @@ export default {
    
   },
   destroyed(){
-    this.$store.commit(`filmsStore/${FILMS_ERROR}`, '')
+    this.$store.commit(`filmsStore/${FILMS_ERROR}`, "")
   }
 
 }

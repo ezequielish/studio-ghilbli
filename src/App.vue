@@ -1,62 +1,47 @@
 <template>
   <div id="app">
-    <Header />
+    <!-- <Header /> -->
     <!-- <img alt="Vue logo" src="./assets/studig.png"> -->
 
-    <router-view/>
+    <router-view />
+    <!-- se imprimen componentes segun la ruta -->
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
+// import Header from "./components/Header.vue"
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Header
-  }
-}
+    // Header
+  },
+};
 </script>
 
 <style>
-body{
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis&display=swap");
+body {
   margin: 0;
   padding: 0;
+  font-family: "Dosis", sans-serif;
+  overflow: hidden;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin: 0;
   padding: 0;
-}
-@media (min-width: 700px) { 
-  #app{
-    display: grid;
-    grid-template-rows: 5% 95%;
-    height: 100vh;
-    overflow-y: hidden;
-  }
 
 }
-@media (min-width: 700px) and (orientation: landscape) {
-  #app{
-    grid-template-rows: 10% 90%;
-  }
 
- }
-
-/* nav a{
-  color: blue;
-  padding: 8px;
+.material-symbols-outlined-fill {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
 }
-nav a.router-link-exact-active{
-  color: red;
- 
-} */
-#error{
-        text-align: center;
+
+#error {
+  text-align: center;
 }
 </style>

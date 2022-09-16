@@ -50,7 +50,7 @@
 
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from "vuex"
 export default {
     name: "Header",
     data: () => ({
@@ -63,11 +63,11 @@ export default {
         },
         handleChangeSearch: function(event){
             let value = event.target.value
-            this.$store.dispatch('filmsStore/changeValueSearch', value)            
+            this.$store.dispatch("filmsStore/changeValueSearch", value)            
         },
         handleClickSearch(id){
             
-            if(this.$router.app._route.name == 'movie'){
+            if(this.$router.app._route.name == "movie"){
                 if(id != this.$route.params.id){
                     this.$router.replace({params: {id: id}})
                 }
@@ -75,17 +75,17 @@ export default {
             }else{
                 this.$router.push({ path: `movie/${id}` })
             }
-          this.$store.dispatch('filmsStore/changeValueSearch', '')   
+          this.$store.dispatch("filmsStore/changeValueSearch", "")   
         }
     },
 
     computed: {
-        ...mapState('filmsStore',['search_movie', 'loading_search']),
+        ...mapState("filmsStore",["search_movie", "loading_search"]),
     },
     watch: {
         "search_movie": function(){
             if(this.search_movie != ""){
-               const result = this.$store.getters['filmsStore/getMovieSearchState'](this.search_movie)              
+               const result = this.$store.getters["filmsStore/getMovieSearchState"](this.search_movie)              
                this.resultSearch = result  
             }
             

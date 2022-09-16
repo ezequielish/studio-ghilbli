@@ -1,133 +1,145 @@
-<!--
 
--->
 
 
 <template>
- <section>
-   <h1>MOVIES</h1>
-   
-   <Loader v-show="this.loading_films"  />
-   <div id="container-movies" v-if="!error">
-     <div v-for="(film,index) in this.films" :key="index">
-       <MovieCard 
-       :index="index" 
-       :id="film.id"
-       :title="film.title"
-       :description="film.description"
-       :director="film.director" 
-       :producer="film.producer"
-       :date="film.release_date"
-       :handleText="handleText"
-       :handleLikeMovie="handleLikeMovie"
-       />
+  <section>
+    <h1>MOVIES</h1>
+
+    <Loader v-show="this.loading_films" />
+    <div id="container-movies" v-if="!error">
+      <div
+        v-for="(film, index) in this.films"
+        :key="index"
+        class="container-movie"
+      >
+        <MovieCard
+          :index="index"
+          :id="film.id"
+          :title="film.title"
+          :image="film.image"
+          :score="film.rt_score"
+          :running_time="film.running_time"
+          :description="film.description"
+          :director="film.director"
+          :producer="film.producer"
+          :date="film.release_date"
+          :handleText="handleText"
+          :handleLikeMovie="handleLikeMovie"
+        />
+      </div>
+      <div v-if="!this.films.length && !this.loading_films">
+        <p>Empty data</p>
+      </div>
     </div>
-   </div> 
-  <div id="error" v-else>
-      <h4>{{error}}</h4>
-  </div> 
-   
- </section>
+    <div id="error" v-else>
+      <h4>{{ error }}</h4>
+    </div>
+  </section>
 </template>
 
 <script>
-
-import Loader from './Loader'
-import MovieCard from './MovieCard'
-import { mapState, mapActions } from 'vuex'
-import { FILMS_ERROR } from '../store/types/fimlsTypes'
-
-
+import Loader from "./Loader";
+import MovieCard from "./MovieCard";
+import { mapState, mapActions } from "vuex";
+import { FILMS_ERROR } from "../store/types/fimlsTypes";
 
 export default {
-  name: 'Films',
+  name: "Films",
   components: {
     Loader,
-    MovieCard
+    MovieCard,
   },
   // props: {
   //   msg: String
   // }
-  data: () => ({
-  }),
-  methods: ({
-  handleText(text){
+  data: () => ({}),
+  methods: {
+    handleText(text) {
       const textLength = text.length;
-      if(textLength > 250){
-        const newText = text.slice(0,250).concat('...')
-        return newText
+      if (textLength > 150) {
+        const newText = text.slice(0, 150).concat("...");
+        return newText;
       }
-      return text
+      return text;
     },
 
-  ...mapActions('filmsStore',['getAllFilmsApi', 'likedMovie']),
-  handleLikeMovie(id){
-    this.likedMovie(`movie-${id}`)
+    ...mapActions("filmsStore", ["getAllFilmsApi", "likedMovie"]),
+    handleLikeMovie(id) {
+      this.likedMovie(`movie-${id}`);
+    },
   },
-   
-
-  }),
- computed: {
-    ...mapState('filmsStore',['films', 'loading_films', 'error']),
+  computed: {
+    ...mapState("filmsStore", ["films", "loading_films", "error"]),
   },
 
-  created(){   
-    if(!this.films.length){
-      this.getAllFilmsApi()
-    }    
+  created() {
+    if (!this.films.length) {
+      this.getAllFilmsApi();
+    }
   },
-  destroyed(){
-       this.$store.commit(`filmsStore/${FILMS_ERROR}`, '')
-  }
-}
+  destroyed() {
+    this.$store.commit(`filmsStore/${FILMS_ERROR}`, "");
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+section {
+  padding: 15px;
+  height: 97vh;
+  overflow-y: scroll;
+  background: #8e9eab; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #eef2f3,
+    #e9e9e9
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #eef2f3,
+    #e9e9e9
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
 
-#container-movies{
+#container-movies {
   display: grid;
   justify-content: center;
   grid-gap: 15px;
   padding: 15px;
 }
 
-h3 {
-  margin: 40px 0 0;
+h1 {
+  margin-top: 0;
+  font-family: "Bebas Neue", cursive;
+  letter-spacing: 1.1px;
+  font-size: 2em;
+  color: #2c3e50;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-
 @media (min-width: 700px) {
-  section{
+  *,
+  section {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .container-movie {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    justify-content: center;
   }
-  section h1{
-    align-self: center;
-  }
-  #container-movies{
-    width: 100%;
-    grid-template-columns: repeat(2,1fr); 
-    width: 80%;
-    overflow-y: scroll;
-  } 
-
 }
-@media (min-width: 1300px) { 
-  #container-movies{
-    grid-template-columns: repeat(3,1fr); 
 
-  } 
+@media (min-width: 910px) {
+  #container-movies {
+    padding: 15px 74px 15px 74px;
+  }
+}
+@media (min-width: 1300px) {
+  *,
+  section {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  #container-movies {
+    padding: 15px 200px 15px 200px;
+  }
 }
 </style>

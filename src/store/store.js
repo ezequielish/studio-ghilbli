@@ -1,7 +1,7 @@
 
-import Vue from 'vue'
-import Vuex from 'vuex'
-import filmsStore from './modules/filmsStore'
+import Vue from "vue"
+import Vuex from "vuex"
+import filmsStore from "./modules/filmsStore"
 Vue.use(Vuex)
 const store = new Vuex.Store({
     
