@@ -1,77 +1,116 @@
  <template>
-  <section>
-    <div class="loader-container">
-      <Loader v-show="this.loading_films" />
-    </div>
-    <div id="card" v-if="!error">
-      <div
-        id="banner-img"
-        :style="backgroundCard(filmSelected.movie_banner)"
-      ></div>
-      <div id="movie-info-container">
-        <div id="img" :style="backgroundCard(filmSelected.image)"></div>
+  <div>
+    <Header />
 
-        <div id="movie-info">
-          <h1>{{ filmSelected.title }}</h1>
-          <h2>{{ filmSelected.original_title }}</h2>
-          <div id="movie-info-star-score">
-            <StarScore
-              :score="parseInt(filmSelected.rt_score)"
-              v-if="parseInt(filmSelected.rt_score) > 0"
-            />
-            <div class="movie-info-time">
-              <span class="material-symbols-outlined timer-icon"> alarm </span>
-              <span>{{ hour }}h {{ minutes }}m</span>
+    <section>
+      <div class="loader-container">
+        <Loader v-show="this.loading_films" />
+      </div>
+      <div id="card" v-if="!error">
+        <div
+          id="banner-img"
+          :style="backgroundCard(filmSelected.movie_banner)"
+        ></div>
+        <div id="movie-info-container">
+          <div id="img" :style="backgroundCard(filmSelected.image)"></div>
+
+          <div id="movie-info">
+            <h1>{{ filmSelected.title }}</h1>
+            <h2>{{ filmSelected.original_title }}</h2>
+            <div id="movie-info-star-score">
+              <StarScore
+                :score="parseInt(filmSelected.rt_score)"
+                v-if="parseInt(filmSelected.rt_score) > 0"
+              />
+              <div class="movie-info-time">
+                <span class="material-symbols-outlined timer-icon">
+                  alarm
+                </span>
+                <span>{{ hour }}h {{ minutes }}m</span>
+              </div>
+            </div>
+            <div class="movie-info-date">
+              <p>{{ filmSelected.release_date }}</p>
             </div>
           </div>
-          <div class="movie-info-date">
-            <p>{{ filmSelected.release_date }}</p>
-          </div>
         </div>
-      </div>
-      <div class="movie-info-dp">
-        <p><span>Director:</span> {{ filmSelected.director }}</p>
-        <p><span>Producer:</span> {{ filmSelected.producer }}</p>
-      </div>
-      <div id="nav-container">
-        <ul class="nav">
-          <li class="li-active">Info</li>
-          <li>Comments</li>
-        </ul>
+        <div class="movie-info-dp">
+          <p><span>Director:</span> {{ filmSelected.director }}</p>
+          <p><span>Producer:</span> {{ filmSelected.producer }}</p>
+        </div>
+        <div id="nav-container">
+          <ul class="nav">
+            <li v-on:click="handleNav" data-id="1" class="li-active">Info</li>
+            <li v-on:click="handleNav" data-id="2">Comments</li>
+          </ul>
 
-        <div>
-          <div id="info">
-            <b>Storyline</b>
-            <p>
-              {{ filmSelected.description }}
-            </p>
+          <div id="container">
+            <div id="info">
+              <b>Storyline</b>
+              <p>
+                {{ filmSelected.description }}
+              </p>
+            </div>
+            <ul class="comments">
+              <div class="comments-textarea" v-if="username != ''">
+                <textarea
+                  maxlength="180"
+                  placeholder="add a comment"
+                  v-on:keyup="handleChangeInput"
+                  :value="commentValue"
+                >
+                </textarea>
+                <div>
+                  <span>{{ commentValueLength }}</span>
+                  <button
+                    v-on:click="handleNewComment"
+                    :disabled="loading_newcomment"
+                  >
+                    <span v-if="!loading_newcomment">Send</span>
+                    <span v-else>Loading...</span>
+                  </button>
+                </div>
+              </div>
+              <CommentFilm :comments="this.filmSelected.comments" />
+              <div v-if="error_comments !== ''" class="comments-error">
+                <p>{{ error_comments }}</p>
+              </div>
+              <p v-if="loading_comment">Loading...</p>
+            </ul>
           </div>
-          <div id=""></div>
         </div>
       </div>
-    </div>
-    <div id="error" v-else>
-      <h4>{{ error }}</h4>
-    </div>
-  </section>
+      <div id="error" v-else>
+        <h4>{{ error }}</h4>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
 import Loader from "./Loader";
-import { FILMS_ERROR } from "../store/types/fimlsTypes";
+import { FILMS_ERROR, ERROR_COMMETS } from "../store/types/fimlsTypes";
 import StarScore from "./StarScore.vue";
+import Header from "./Header";
+import CommentFilm from "./CommentFilm";
+import swal from "sweetalert";
 
 export default {
   name: "Movie",
   components: {
     Loader,
     StarScore,
+    Header,
+    CommentFilm,
   },
   data: () => ({
     hour: 0,
     minutes: 0,
     filmSelected: {},
+    commentValue: "",
+    loading_newcomment: false,
+    commentValueLength: 180,
   }),
   created() {
     if (!this.films.length) {
@@ -81,19 +120,41 @@ export default {
         );
         this.filmSelected = film;
         this.setHourMin(film, this);
+        this.$store
+          .dispatch("filmsStore/getAllCommentFilm", this.$route.params.id)
+          .then(() => {
+            const film = this.$store.getters["filmsStore/getFilm"](
+              this.$route.params.id
+            );
+
+            this.filmSelected = film;
+          });
       });
     } else {
       const film = this.$store.getters["filmsStore/getFilm"](
         this.$route.params.id
       );
       this.filmSelected = film;
-
       this.setHourMin(film, this);
+      this.$store
+        .dispatch("filmsStore/getAllCommentFilm", this.$route.params.id)
+        .then(() => {
+          const film = this.$store.getters["filmsStore/getFilm"](
+            this.$route.params.id
+          );
+          this.filmSelected = film;
+        });
     }
   },
   computed: {
-    ...mapState("filmsStore", ["films", "loading_films", "error"]),
-
+    ...mapState("filmsStore", [
+      "films",
+      "loading_films",
+      "error",
+      "error_comments",
+      "loading_comment",
+    ]),
+    ...mapState("authStore", ["username"]),
     backgroundCard: () => {
       return (img) => {
         return {
@@ -111,7 +172,20 @@ export default {
         this.$store.getters["filmsStore/getFilm"](this.$route.params.id);
       }
     },
+    error_comments() {
+      if (this.error_comments != "") {
+        swal({
+          title: "Error!",
+          text: this.error_comments,
+          icon: "warning",
+          button: "Close!",
+        }).then(() => {
+          this.$store.commit(`filmsStore/${ERROR_COMMETS}`, "");
+        });
+      }
+    },
   },
+
   methods: {
     pad: (number) => {
       if (number < 10) {
@@ -127,6 +201,52 @@ export default {
         _this.hour = hour;
         _this.minutes = minutes;
       }
+    },
+    handleNewComment: async function () {
+      if (this.commentValue != "") {
+        this.loading_newcomment = true;
+        try {
+          this.$store
+            .dispatch("filmsStore/addComment", {
+              comment: this.commentValue,
+              id_film: this.$route.params.id,
+            })
+            .then((message) => {
+              this.commentValue = "";
+              this.commentValueLength = 180;
+              this.loading_newcomment = false;
+              if (message != "" && message != undefined) {
+                swal({
+                  title: "Success!",
+                  text: message,
+                  icon: "success",
+                  button: "Close!",
+                });
+              }
+            });
+        } catch (error) {
+          this.loading_newcomment = false;
+        }
+      }
+    },
+    handleChangeInput(ev) {
+      this.commentValue = ev.target.value;
+      this.commentValueLength = 180 - this.commentValue.length;
+    },
+    handleNav: (ev) => {
+      const nav = document.querySelector(".nav");
+      const container = document.querySelector("#container");
+      const element = ev.target;
+      const id = parseInt(element.dataset.id);
+
+      nav.children.forEach((element) => {
+        element.classList.remove("li-active");
+      });
+      container.children.forEach((element) => {
+        element.style.display = "none";
+      });
+      element.classList.add("li-active");
+      container.children[id - 1].style.display = "flex";
     },
   },
 };
@@ -190,6 +310,51 @@ h2 {
   font-size: 1.7em;
 }
 
+.comments {
+  font-family: "Dosis", sans-serif;
+  height: 525px;
+  /* overflow-y: scroll; */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  display: none;
+}
+.comments .comments-textarea {
+  margin: 10px;
+  align-items: center;
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+}
+.comments .comments-textarea div {
+  align-self: flex-end;
+}
+.comments .comments-textarea div button {
+  padding: 7px;
+  width: 65px;
+  font-family: "Dosis";
+  outline: none;
+  border-radius: 5px;
+  border: solid grey 1px;
+  margin-left: 12px;
+}
+.comments textarea {
+  width: 98%;
+  resize: none;
+  height: 85px;
+  outline: none;
+  padding: 6px;
+  margin-bottom: 4px;
+}
+
+.comments .comments-error {
+  width: 100%;
+}
+.comments .comments-error p {
+  text-align: center;
+}
+
 #movie-info-container {
   display: flex;
   flex-direction: column;
@@ -250,6 +415,7 @@ h2 {
   font-family: "Dosis", sans-serif;
   font-size: 1.2em;
   margin-bottom: 0px;
+  cursor: pointer;
 }
 .nav li {
   padding: 7px;
@@ -266,6 +432,7 @@ h2 {
   padding: 14px;
   color: #3c3c3c;
   flex-direction: column;
+  padding-bottom: 80px !important;
 }
 #info p {
   margin: 0;

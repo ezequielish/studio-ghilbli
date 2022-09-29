@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!-- <Header /> -->
     <!-- <img alt="Vue logo" src="./assets/studig.png"> -->
 
     <router-view />
@@ -9,13 +8,10 @@
 </template>
 
 <script>
-// import Header from "./components/Header.vue"
 
 export default {
   name: "App",
-  components: {
-    // Header
-  },
+
 };
 </script>
 

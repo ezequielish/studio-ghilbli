@@ -2,44 +2,48 @@
 
 
 <template>
-  <section>
-    <h1>MOVIES</h1>
+  <div>
+    <Header />
+    <section>
+      <h1>MOVIES</h1>
 
-    <Loader v-show="this.loading_films" />
-    <div id="container-movies" v-if="!error">
-      <div
-        v-for="(film, index) in this.films"
-        :key="index"
-        class="container-movie"
-      >
-        <MovieCard
-          :index="index"
-          :id="film.id"
-          :title="film.title"
-          :image="film.image"
-          :score="film.rt_score"
-          :running_time="film.running_time"
-          :description="film.description"
-          :director="film.director"
-          :producer="film.producer"
-          :date="film.release_date"
-          :handleText="handleText"
-          :handleLikeMovie="handleLikeMovie"
-        />
+      <Loader v-show="this.loading_films" />
+      <div id="container-movies" v-if="!error">
+        <div
+          v-for="(film, index) in this.films"
+          :key="index"
+          class="container-movie"
+        >
+          <MovieCard
+            :index="index"
+            :id="film.id"
+            :title="film.title"
+            :image="film.image"
+            :score="film.rt_score"
+            :running_time="film.running_time"
+            :description="film.description"
+            :director="film.director"
+            :producer="film.producer"
+            :date="film.release_date"
+            :handleText="handleText"
+            :handleLikeMovie="handleLikeMovie"
+          />
+        </div>
+        <div v-if="!this.films.length && !this.loading_films">
+          <p>Empty data</p>
+        </div>
       </div>
-      <div v-if="!this.films.length && !this.loading_films">
-        <p>Empty data</p>
+      <div id="error" v-else>
+        <h4>{{ error }}</h4>
       </div>
-    </div>
-    <div id="error" v-else>
-      <h4>{{ error }}</h4>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
 import Loader from "./Loader";
 import MovieCard from "./MovieCard";
+import Header from "./Header.vue";
 import { mapState, mapActions } from "vuex";
 import { FILMS_ERROR } from "../store/types/fimlsTypes";
 
@@ -48,6 +52,7 @@ export default {
   components: {
     Loader,
     MovieCard,
+    Header,
   },
   // props: {
   //   msg: String

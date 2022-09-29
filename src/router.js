@@ -9,6 +9,11 @@ export default new Router({
     base: process.env.BASE_URL,
     routes: [
         {
+            path: "/login",
+            name: "login",
+            component: () => import("./components/Login.vue")
+        },
+        {
             path: "/",
             name: "home",
             component: () => import("./components/Films.vue")// de esta forma importamos nuestros componentes en lazy loading
