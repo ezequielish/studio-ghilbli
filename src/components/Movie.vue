@@ -311,7 +311,7 @@ h2 {
 }
 
 .comments {
-  font-family: "Dosis", sans-serif;
+  font-family: "Dosis", system-ui;
   height: 525px;
   /* overflow-y: scroll; */
   padding: 0;
@@ -333,7 +333,7 @@ h2 {
 .comments .comments-textarea div button {
   padding: 7px;
   width: 65px;
-  font-family: "Dosis";
+  font-family: "Dosis", system-ui;
   outline: none;
   border-radius: 5px;
   border: solid grey 1px;
@@ -360,7 +360,7 @@ h2 {
   flex-direction: column;
 }
 #movie-info {
-  font-family: "Dosis", sans-serif;
+  font-family: "Dosis", system-ui;
   width: 210px;
   margin-top: 14px;
   margin-left: 14px;
@@ -388,7 +388,7 @@ h2 {
   margin-left: 2px;
   margin-top: 6px;
   padding: 2px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, system-ui;
   color: #3c3c3c;
 }
 .movie-info-dp {
@@ -396,7 +396,7 @@ h2 {
   margin-left: 14px;
   flex-direction: column;
   align-items: flex-start;
-  font-family: "Dosis", sans-serif;
+  font-family: "Dosis", system-ui;
 }
 
 .movie-info-dp p {
@@ -412,7 +412,7 @@ h2 {
   list-style: none;
   justify-content: center;
   padding-left: 26px;
-  font-family: "Dosis", sans-serif;
+  font-family: "Dosis", system-ui;
   font-size: 1.2em;
   margin-bottom: 0px;
   cursor: pointer;

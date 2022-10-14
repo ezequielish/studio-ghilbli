@@ -1,7 +1,7 @@
 
 import { LOADING_AUTH, ERROR_LOGIN, LOGOUT_AUTH, SET_USERNAME } from "../types/authTypes"
 
-const url = "http://127.0.0.1:8000/api/login"
+const url = process.env.VUE_APP_URL_PROD + "/login"
 
 const store = {
     namespaced: true,
@@ -65,6 +65,10 @@ const store = {
 
                 headers.append("Authorization", `Basic ${auth}`);
 
+                console.log({
+                    dd:process.env,
+                    url
+                });
 
                 let request = await fetch(url, {
                     headers,

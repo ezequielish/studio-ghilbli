@@ -7,13 +7,16 @@
     <div id="info-user">
       <div v-if="username != ''">
         <p>{{ username }}</p>
-        <img :src="profileImg" id="profile-img" />
+        <router-link to="/user">
+          <img :src="profileImg" id="profile-img" />
+        </router-link>
         <button v-on:click="handleLogout">
           <img :src="logout" width="14px" />
         </button>
       </div>
       <div v-else>
         <router-link to="/login">log in </router-link>
+        <router-link to="/register">sign in </router-link>
       </div>
     </div>
   </header>
@@ -92,11 +95,11 @@ header {
 
 #info-user p {
   margin-right: 14px;
-  font-family: "Dosis", sans-serif;
+  font-family: "Dosis", system-ui;
 }
 #info-user a {
   margin-right: 14px;
-  font-family: "Dosis", sans-serif;
+  font-family: "Dosis", system-ui;
   text-decoration: none;
   color: black;
   font-size: 1.2em;
@@ -108,6 +111,14 @@ header {
   margin-top: 7px;
 }
 
+.buttom-profile-img {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  background: none;
+  outline: none;
+}
 #profile-img {
   width: 35px;
   height: 35px;

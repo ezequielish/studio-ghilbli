@@ -116,7 +116,7 @@ section {
 
 h1 {
   margin-top: 0;
-  font-family: "Bebas Neue", cursive;
+  font-family: "Bebas Neue", system-ui;
   letter-spacing: 1.1px;
   font-size: 2em;
   color: #2c3e50;

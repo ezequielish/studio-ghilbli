@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <form id="form" v-on:submit="sendLogin">
       <router-link to="/"> <img :src="logo" /> </router-link>
 
@@ -28,10 +28,10 @@
 
       <button :disabled="loading">
         <p v-if="loading">Loading...</p>
-        <p v-else>Sign in</p>
+        <p v-else>Log in</p>
       </button>
 
-      <p>Dont' have an account? Sing Up</p>
+      <p>Dont' have an account? Sing in</p>
     </form>
   </div>
 </template>
@@ -94,6 +94,12 @@ export default {
 
 
 <style scoped>
+.wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 #form {
   display: flex;
   flex-direction: column;
