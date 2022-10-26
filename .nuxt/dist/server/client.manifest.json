@@ -4,7 +4,7 @@
     "../server/index.spa.html",
     "../server/index.ssr.html",
     "LICENSES",
-    "app.2785e3f.js",
+    "app.50d4b1a.js",
     "img/logout.85a4be3.png",
     "img/menucomment.b9f05dd.png",
     "img/profile.649e5cb.jpg",
@@ -16,22 +16,22 @@
     "pages/Register.71ff777.js",
     "pages/User.6e3567a.js",
     "pages/index.44285d3.js",
-    "pages/movie/_id.7a357af.js",
-    "runtime.bad0e98.js",
+    "pages/movie/_id.80a2fa7.js",
+    "runtime.620b749.js",
     "vendors/Register~User~movie.id.fc5f39d.js",
     "vendors/commons.4f2522a.js"
   ],
   "initial": [
-    "runtime.bad0e98.js",
+    "runtime.620b749.js",
     "vendors/commons.4f2522a.js",
-    "app.2785e3f.js"
+    "app.50d4b1a.js"
   ],
   "async": [
     "pages/Login.9e896d4.js",
     "pages/Register.71ff777.js",
     "pages/User.6e3567a.js",
     "pages/index.44285d3.js",
-    "pages/movie/_id.7a357af.js",
+    "pages/movie/_id.80a2fa7.js",
     "vendors/Register~User~movie.id.fc5f39d.js"
   ],
   "modules": {
@@ -713,7 +713,7 @@
       11,
       10
     ],
-    "6fb8d670": [
+    "24a7f2bd": [
       15,
       18,
       17,
@@ -797,7 +797,7 @@
       4,
       5
     ],
-    "2ecda65c": [
+    "c4ef6dc2": [
       15,
       18,
       17,
@@ -809,7 +809,7 @@
       4,
       5
     ],
-    "25a64dd0": [
+    "4ad52bc6": [
       15,
       18,
       17,
@@ -1041,7 +1041,7 @@
       4,
       5
     ],
-    "4c977bff": [
+    "707c35dc": [
       15,
       18,
       17,
@@ -1065,7 +1065,7 @@
       4,
       5
     ],
-    "d34f3ec6": [
+    "1182c9b0": [
       15,
       18,
       17,
@@ -1278,7 +1278,7 @@
   },
   "assetsMapping": {
     "1a3ae26b": [
-      "app.2785e3f.js"
+      "app.50d4b1a.js"
     ],
     "2d4360f0": [
       "pages/Login.9e896d4.js"
@@ -1293,10 +1293,10 @@
       "pages/index.44285d3.js"
     ],
     "bdf9e1cc": [
-      "pages/movie/_id.7a357af.js"
+      "pages/movie/_id.80a2fa7.js"
     ],
     "6fca0322": [
-      "runtime.bad0e98.js"
+      "runtime.620b749.js"
     ],
     "e27d05aa": [
       "vendors/Register~User~movie.id.fc5f39d.js"

@@ -808,7 +808,7 @@ const store = {
       if (false) {}
     },
     SET_USERNAME(state) {
-      if (false) { var _user$name; } else {
+      if (false) {} else {
         state.username = "";
       }
     }
