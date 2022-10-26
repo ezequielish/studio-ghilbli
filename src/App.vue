@@ -17,12 +17,7 @@ export default {
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dosis&display=swap");
-body {
-  margin: 0;
-  padding: 0;
-  font-family: "Dosis", sans-serif;
-  overflow: hidden;
-}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

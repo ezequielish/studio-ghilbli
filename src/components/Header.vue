@@ -1,22 +1,22 @@
 <template>
   <header>
     <figure id="logo">
-      <router-link to="/"> <img :src="logo" /> </router-link>
+      <NuxtLink to="/"> <img :src="logo" /> </NuxtLink>
     </figure>
 
     <div id="info-user">
       <div v-if="username != ''">
         <p>{{ username }}</p>
-        <router-link to="/user">
+        <NuxtLink to="/user">
           <img :src="profileImg" id="profile-img" />
-        </router-link>
+        </NuxtLink>
         <button v-on:click="handleLogout">
           <img :src="logout" width="14px" />
         </button>
       </div>
       <div v-else>
-        <router-link to="/login">log in </router-link>
-        <router-link to="/register">sign in </router-link>
+        <NuxtLink to="/login">log in </NuxtLink>
+        <NuxtLink to="/register">sign in </NuxtLink>
       </div>
     </div>
   </header>

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <form id="form" v-on:submit="formSubmit">
-      <router-link to="/"> <img :src="logo" /> </router-link>
+      <NuxtLink to="/"> <img :src="logo" /> </NuxtLink>
 
       <div id="input-wrapper">
         <h1>Sign in</h1>

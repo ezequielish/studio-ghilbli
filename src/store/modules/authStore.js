@@ -23,13 +23,16 @@ const store = {
             state.error = payload
         },
         LOGOUT_AUTH() {
-            window.localStorage.removeItem("user_sg")
-            window.localStorage.removeItem("user_sg_scope")
-            window.localStorage.removeItem("user_sg_token")
+            if (process.browser) {
+                localStorage.removeItem("user_sg")
+                localStorage.removeItem("user_sg_scope")
+                localStorage.removeItem("user_sg_token")
+            }
+
         },
         SET_USERNAME(state) {
-            if (window.localStorage.getItem("user_sg") != null) {
-                const user = JSON.parse(window.localStorage.getItem("user_sg"));
+            if (process.browser && localStorage.getItem("user_sg") != null) {
+                const user = JSON.parse(localStorage.getItem("user_sg"));
                 state.username = user.name ?? "";
             } else {
                 state.username = "";
@@ -66,7 +69,7 @@ const store = {
                 headers.append("Authorization", `Basic ${auth}`);
 
                 console.log({
-                    dd:process.env,
+                    dd: process.env,
                     url
                 });
 
@@ -81,10 +84,12 @@ const store = {
                     throw dataJson.message
                 }
 
+                if (process.browser) {
+                    localStorage.setItem("user_sg", JSON.stringify(dataJson.data.user))
+                    localStorage.setItem("user_sg_scope", JSON.stringify(dataJson.data.scope))
+                    localStorage.setItem("user_sg_token", dataJson.data.token)
+                }
 
-                window.localStorage.setItem("user_sg", JSON.stringify(dataJson.data.user))
-                window.localStorage.setItem("user_sg_scope", JSON.stringify(dataJson.data.scope))
-                window.localStorage.setItem("user_sg_token", dataJson.data.token)
                 commit(LOADING_AUTH, false)
 
                 return true
