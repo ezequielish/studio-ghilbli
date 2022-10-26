@@ -12,7 +12,5 @@ export default {
             { rel: "icon", type: "image/x-icon", href: "/fav.png" }
         ]
     },
-    server: {
-        host: "0.0.0.0"
-    }
+    target: "static"
 }
