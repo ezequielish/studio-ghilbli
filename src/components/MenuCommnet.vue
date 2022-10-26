@@ -66,7 +66,10 @@ export default {
         });
         this.loading_comment_del = false;
         if (result) {
-          this.handleAlert(result.message ?? "");
+          this.handleAlert(
+            // eslint-disable-next-line no-prototype-builtins
+            result.hasOwnProperty("message") ? result.message : ""
+          );
         }
       } catch (error) {
         this.loading_comment_del = false;
