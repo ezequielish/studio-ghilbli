@@ -8,8 +8,8 @@
     "lint": "vue-cli-service lint --fix",
     "dev": "nuxt",
     "nuxt-build": "nuxt build",
-    "nuxt-start": "nuxt start"
-
+    "nuxt-start": "nuxt start",
+    "generate": "nuxt generate"
   },
   "dependencies": {
     "babel-loader": "^8.2.5",
