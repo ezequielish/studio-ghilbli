@@ -33,7 +33,7 @@ const store = {
         SET_USERNAME(state) {
             if (process.browser && localStorage.getItem("user_sg") != null) {
                 const user = JSON.parse(localStorage.getItem("user_sg"));
-                state.username = user.name ?? "";
+                state.username = user.hasOwnProperty("name") ? user.name : "";
             } else {
                 state.username = "";
             }
