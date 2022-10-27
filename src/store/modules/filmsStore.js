@@ -228,6 +228,9 @@ const store = {
         let oldFilms = [...state.films]
         oldFilms[indexFilm]
 
+        console.log({
+          d: process.env.baseUrl
+        });
         const request = await fetch(`${URL_COMMENTS_FILM}/${id}`, {
           // headers,
           method: "GET"
