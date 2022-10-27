@@ -21,17 +21,17 @@
     "_name": "_de267fd8"
   },
   {
-    "name": "movie-id",
-    "path": "/movie/:id?",
-    "component": "/home/ezequiel/development/studio-ghilbli/src/pages/movie/_id.vue",
-    "chunkName": "pages/movie/_id",
-    "_name": "_05a8a9fc"
-  },
-  {
     "name": "index",
     "path": "/",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/index.vue",
     "chunkName": "pages/index",
     "_name": "_590a2d0e"
+  },
+  {
+    "name": "movie-id",
+    "path": "/:movie/:id?",
+    "component": "/home/ezequiel/development/studio-ghilbli/src/pages/_movie/_id.vue",
+    "chunkName": "pages/_movie/_id",
+    "_name": "_62a31fc5"
   }
 ]
