@@ -5,7 +5,7 @@
     "pages/Register.js": "pages/Register.js",
     "pages/User.js": "pages/User.js",
     "pages/index.js": "pages/index.js",
-    "pages/movie/[id].js": "pages/movie/[id].js",
+    "pages/movie-[group]/[id].js": "pages/movie-[group]/[id].js",
     "server.js": "server.js"
   },
   "maps": {
@@ -13,7 +13,7 @@
     "pages/Register.js": "pages/Register.js.map",
     "pages/User.js": "pages/User.js.map",
     "pages/index.js": "pages/index.js.map",
-    "pages/movie/[id].js": "pages/movie/[id].js.map",
+    "pages/movie-[group]/[id].js": "pages/movie-[group]/[id].js.map",
     "server.js": "server.js.map"
   }
 }

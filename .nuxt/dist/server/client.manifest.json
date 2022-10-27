@@ -4,7 +4,7 @@
     "../server/index.spa.html",
     "../server/index.ssr.html",
     "LICENSES",
-    "app.6ea9c57.js",
+    "app.5bb017a.js",
     "img/logout.85a4be3.png",
     "img/menucomment.b9f05dd.png",
     "img/profile.649e5cb.jpg",
@@ -16,23 +16,23 @@
     "pages/Register.d20f10f.js",
     "pages/User.78710dc.js",
     "pages/index.29b7663.js",
-    "pages/movie/[id].70582af.js",
-    "runtime.d95efa7.js",
-    "vendors/Register~User~movie.[id].f7461e5.js",
+    "pages/movie-[group]/[id].3d12765.js",
+    "runtime.e53f781.js",
+    "vendors/Register~User~movie-[group].[id].f7461e5.js",
     "vendors/commons.fc1126a.js"
   ],
   "initial": [
-    "runtime.d95efa7.js",
+    "runtime.e53f781.js",
     "vendors/commons.fc1126a.js",
-    "app.6ea9c57.js"
+    "app.5bb017a.js"
   ],
   "async": [
     "pages/Login.82b053d.js",
     "pages/Register.d20f10f.js",
     "pages/User.78710dc.js",
     "pages/index.29b7663.js",
-    "pages/movie/[id].70582af.js",
-    "vendors/Register~User~movie.[id].f7461e5.js"
+    "pages/movie-[group]/[id].3d12765.js",
+    "vendors/Register~User~movie-[group].[id].f7461e5.js"
   ],
   "modules": {
     "29477716": [
@@ -53,6 +53,18 @@
     ],
     "54539242": [
       18
+    ],
+    "73704770": [
+      15,
+      18,
+      17,
+      10,
+      6,
+      8,
+      9,
+      7,
+      4,
+      5
     ],
     "1e34106c": [
       3
@@ -740,7 +752,7 @@
       4,
       5
     ],
-    "6fd94034": [
+    "04239666": [
       15,
       18,
       17,
@@ -848,19 +860,7 @@
       4,
       5
     ],
-    "2c04a7c8": [
-      15,
-      18,
-      17,
-      10,
-      6,
-      8,
-      9,
-      7,
-      4,
-      5
-    ],
-    "04744174": [
+    "16de9474": [
       15,
       18,
       17,
@@ -912,7 +912,7 @@
       7,
       4
     ],
-    "1d2a1e35": [
+    "c8e470ae": [
       15,
       18,
       17,
@@ -924,7 +924,7 @@
       4,
       5
     ],
-    "05a538ce": [
+    "310f48b1": [
       15,
       18,
       17,
@@ -936,7 +936,7 @@
       4,
       5
     ],
-    "27d87d3f": [
+    "5c32c16a": [
       15,
       18,
       17,
@@ -948,7 +948,7 @@
       4,
       5
     ],
-    "502596b7": [
+    "0e297dcf": [
       15,
       18,
       17,
@@ -960,7 +960,7 @@
       4,
       5
     ],
-    "bfc6a94a": [
+    "4998f167": [
       15,
       18,
       17,
@@ -1281,7 +1281,7 @@
   },
   "assetsMapping": {
     "1a3ae26b": [
-      "app.6ea9c57.js"
+      "app.5bb017a.js"
     ],
     "2d4360f0": [
       "pages/Login.82b053d.js"
@@ -1295,14 +1295,14 @@
     "2a130dde": [
       "pages/index.29b7663.js"
     ],
-    "7f5d0307": [
-      "pages/movie/[id].70582af.js"
+    "a0b6070a": [
+      "pages/movie-[group]/[id].3d12765.js"
     ],
     "6fca0322": [
-      "runtime.d95efa7.js"
+      "runtime.e53f781.js"
     ],
-    "375ebf12": [
-      "vendors/Register~User~movie.[id].f7461e5.js"
+    "361118eb": [
+      "vendors/Register~User~movie-[group].[id].f7461e5.js"
     ],
     "07a97964": [
       "vendors/commons.fc1126a.js"

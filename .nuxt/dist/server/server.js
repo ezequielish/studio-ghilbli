@@ -43,7 +43,7 @@ module.exports =
 /******/
 /******/ 		// "0" is the signal for "already loaded"
 /******/ 		if(installedChunks[chunkId] !== 0) {
-/******/ 			var chunk = require("./" + ({"1":"pages/Login","2":"pages/Register","3":"pages/User","4":"pages/index","5":"pages/movie/[id]"}[chunkId]||chunkId) + ".js");
+/******/ 			var chunk = require("./" + ({"1":"pages/Login","2":"pages/Register","3":"pages/User","4":"pages/index","5":"pages/movie-[group]/[id]"}[chunkId]||chunkId) + ".js");
 /******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids;
 /******/ 			for(var moduleId in moreModules) {
 /******/ 				modules[moduleId] = moreModules[moduleId];
@@ -1785,7 +1785,7 @@ if (false) {}
 const _1494ac70 = () => interopDefault(__webpack_require__.e(/* import() | pages/Login */ 1).then(__webpack_require__.bind(null, 74)));
 const _80c05328 = () => interopDefault(__webpack_require__.e(/* import() | pages/Register */ 2).then(__webpack_require__.bind(null, 76)));
 const _de267fd8 = () => interopDefault(__webpack_require__.e(/* import() | pages/User */ 3).then(__webpack_require__.bind(null, 77)));
-const _0b3a9dcf = () => interopDefault(__webpack_require__.e(/* import() | pages/movie/[id] */ 5).then(__webpack_require__.bind(null, 73)));
+const _c44be57a = () => interopDefault(__webpack_require__.e(/* import() | pages/movie-[group]/[id] */ 5).then(__webpack_require__.bind(null, 73)));
 const _590a2d0e = () => interopDefault(__webpack_require__.e(/* import() | pages/index */ 4).then(__webpack_require__.bind(null, 75)));
 
 // TODO: remove in Nuxt 3
@@ -1814,9 +1814,9 @@ const routerOptions = {
     component: _de267fd8,
     name: "User"
   }, {
-    path: "/movie/[id]",
-    component: _0b3a9dcf,
-    name: "movie-[id]"
+    path: "/movie-[group]/[id]",
+    component: _c44be57a,
+    name: "movie-[group]-[id]"
   }, {
     path: "/",
     component: _590a2d0e,
