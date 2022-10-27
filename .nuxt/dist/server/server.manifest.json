@@ -1,0 +1,19 @@
+{
+  "entry": "server.js",
+  "files": {
+    "pages/Login.js": "pages/Login.js",
+    "pages/Register.js": "pages/Register.js",
+    "pages/User.js": "pages/User.js",
+    "pages/index.js": "pages/index.js",
+    "pages/movie/_id.js": "pages/movie/_id.js",
+    "server.js": "server.js"
+  },
+  "maps": {
+    "pages/Login.js": "pages/Login.js.map",
+    "pages/Register.js": "pages/Register.js.map",
+    "pages/User.js": "pages/User.js.map",
+    "pages/index.js": "pages/index.js.map",
+    "pages/movie/_id.js": "pages/movie/_id.js.map",
+    "server.js": "server.js.map"
+  }
+}
