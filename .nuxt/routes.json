@@ -3,30 +3,35 @@
     "name": "Login",
     "path": "/Login",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/Login.vue",
-    "chunkName": "pages/Login"
+    "chunkName": "pages/Login",
+    "_name": "_1494ac70"
   },
   {
     "name": "Register",
     "path": "/Register",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/Register.vue",
-    "chunkName": "pages/Register"
+    "chunkName": "pages/Register",
+    "_name": "_80c05328"
   },
   {
     "name": "User",
     "path": "/User",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/User.vue",
-    "chunkName": "pages/User"
+    "chunkName": "pages/User",
+    "_name": "_de267fd8"
   },
   {
     "name": "movie-id",
     "path": "/movie/:id?",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/movie/_id.vue",
-    "chunkName": "pages/movie/_id"
+    "chunkName": "pages/movie/_id",
+    "_name": "_05a8a9fc"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/index.vue",
-    "chunkName": "pages/index"
+    "chunkName": "pages/index",
+    "_name": "_590a2d0e"
   }
 ]
