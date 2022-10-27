@@ -1,5 +1,4 @@
 export default {
-    mode: "spa",
     srcDir: "src/",
     css: ["~/assets/main"],
     head: {
@@ -20,7 +19,10 @@ export default {
     env: {
         baseUrl: process.env.BASE_URL || "http://localhost:3000"
     },
-    target: "static"
+    target: "static",
+    generate: {
+        fallback: "custom_sap_fallbackpage.html"
+    }
 }
 
 
