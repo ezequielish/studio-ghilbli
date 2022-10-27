@@ -1,7 +1,7 @@
 
 import { LOADING_AUTH, ERROR_LOGIN, LOGOUT_AUTH, SET_USERNAME } from "../types/authTypes"
 
-const url = process.env.VUE_APP_URL_PROD + "/login"
+const url = process.env.baseUrl + "/login"
 
 const store = {
     namespaced: true,

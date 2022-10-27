@@ -2,19 +2,33 @@
 
 
 <template>
-    <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+  <div class="template">
+    <div class="lds-roller">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
- name: "Loader",
-
-}
+  name: "Loader",
+};
 </script>
 
 
 <style scoped>
-
+.template {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .lds-roller {
   display: inline-block;
   position: relative;
@@ -100,10 +114,9 @@ export default {
   }
 }
 @media (min-width: 700px) {
-  .lds-roller{
-      align-self: center;
+  .lds-roller {
+    align-self: center;
   }
-
 }
 </style>
 

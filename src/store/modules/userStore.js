@@ -1,5 +1,5 @@
 
-const URL_USER_CREATE = process.env.VUE_APP_URL_PROD + "/user"
+const URL_USER_CREATE = process.env.baseUrl + "/user"
 import {
     USER_ERROR,
     USER_LOADING

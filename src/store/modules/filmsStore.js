@@ -9,7 +9,7 @@ import {
   LOADING_COMMETS,
 } from "../types/fimlsTypes"
 const URL_ALL_MOVIES = "https://ghibliapi.herokuapp.com/films/";
-const URL_COMMENTS_FILM = process.env.VUE_APP_URL_PROD + "/comment";
+const URL_COMMENTS_FILM = process.env.baseUrl + "/comment";
 const ERROR_DEFAULT = "Something went wrong, please try again later"
 
 const store = {

@@ -75,7 +75,7 @@
               <div v-if="error_comments !== ''" class="comments-error">
                 <p>{{ error_comments }}</p>
               </div>
-              <p v-if="loading_comment">Loading...</p>
+              <p v-if="loading_comment" class="loading-comments">Loading...</p>
             </ul>
           </div>
         </div>
@@ -273,6 +273,13 @@ section {
 #card {
   position: relative;
 }
+.loading-comments {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 15px;
+}
+
 .loader-container {
   width: 100%;
   display: flex;
@@ -321,6 +328,7 @@ h2 {
   flex-direction: column;
   align-items: flex-start;
   display: none;
+  position: relative;
 }
 .comments .comments-textarea {
   margin: 10px;
@@ -349,7 +357,6 @@ h2 {
   padding: 6px;
   margin-bottom: 4px;
 }
-
 
 .material-symbols-outlined-fill {
   font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 48;
