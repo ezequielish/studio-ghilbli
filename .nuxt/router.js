@@ -6,7 +6,7 @@ import scrollBehavior from './router.scrollBehavior.js'
 const _1494ac70 = () => interopDefault(import('../src/pages/Login.vue' /* webpackChunkName: "pages/Login" */))
 const _80c05328 = () => interopDefault(import('../src/pages/Register.vue' /* webpackChunkName: "pages/Register" */))
 const _de267fd8 = () => interopDefault(import('../src/pages/User.vue' /* webpackChunkName: "pages/User" */))
-const _c44be57a = () => interopDefault(import('../src/pages/movie-[group]/[id].vue' /* webpackChunkName: "pages/movie-[group]/[id]" */))
+const _05a8a9fc = () => interopDefault(import('../src/pages/movie/_id.vue' /* webpackChunkName: "pages/movie/_id" */))
 const _590a2d0e = () => interopDefault(import('../src/pages/index.vue' /* webpackChunkName: "pages/index" */))
 
 // TODO: remove in Nuxt 3
@@ -38,9 +38,9 @@ export const routerOptions = {
     component: _de267fd8,
     name: "User"
   }, {
-    path: "/movie-[group]/[id]",
-    component: _c44be57a,
-    name: "movie-[group]-[id]"
+    path: "/movie/:id?",
+    component: _05a8a9fc,
+    name: "movie-id"
   }, {
     path: "/",
     component: _590a2d0e,

@@ -1,4 +1,5 @@
 export default {
+    mode: "spa",
     srcDir: "src/",
     css: ["~/assets/main"],
     head: {

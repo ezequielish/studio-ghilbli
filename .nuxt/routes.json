@@ -21,11 +21,11 @@
     "_name": "_de267fd8"
   },
   {
-    "name": "movie-[group]-[id]",
-    "path": "/movie-[group]/[id]",
-    "component": "/home/ezequiel/development/studio-ghilbli/src/pages/movie-[group]/[id].vue",
-    "chunkName": "pages/movie-[group]/[id]",
-    "_name": "_c44be57a"
+    "name": "movie-id",
+    "path": "/movie/:id?",
+    "component": "/home/ezequiel/development/studio-ghilbli/src/pages/movie/_id.vue",
+    "chunkName": "pages/movie/_id",
+    "_name": "_05a8a9fc"
   },
   {
     "name": "index",
