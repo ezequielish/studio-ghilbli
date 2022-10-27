@@ -69,10 +69,6 @@ const store = {
 
                 headers.append("Authorization", `Basic ${auth}`);
 
-                console.log({
-                    dd: process.env,
-                    url
-                });
 
                 let request = await fetch(url, {
                     headers,

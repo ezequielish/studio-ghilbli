@@ -75,14 +75,17 @@ export default {
     ...mapState("userStore", ["userError", "userLoading"]),
   },
   beforeCreate() {
-    if (this.$route.name == "register") {
+    if (this.$route.path == "/register") {
       if (localStorage.getItem("user_sg")) {
         this.$router.push("/");
       }
     }
   },
   created() {
-    if (this.$route.name == "user") {
+    console.log({
+      ff: this.$route,
+    });
+    if (this.$route.path == "/user") {
       this.typeForm = "user";
       const user =
         localStorage.getItem("user_sg") &&
@@ -92,7 +95,7 @@ export default {
       this.email = user.email;
       this.formSubmit = this.editUser;
     }
-    if (this.$route.name == "register") {
+    if (this.$route.path == "/register") {
       this.typeForm = "register";
       this.formSubmit = this.newUser;
     }
