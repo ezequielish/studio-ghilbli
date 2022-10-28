@@ -78,6 +78,7 @@ export default {
   },
 
   created() {
+    console.log({ dd: this.loading_films });
     if (!this.films.length) {
       console.log("IndexFilms");
       this.getAllFilmsApi();
