@@ -45,7 +45,7 @@ import Loader from "../components/Loader";
 import MovieCard from "../components/MovieCard";
 import Header from "../components/Header.vue";
 import { mapState, mapActions } from "vuex";
-import { FILMS_ERROR } from "../store/types/fimlsTypes";
+import { FILMS_ERROR, FILMS_LOADING } from "../store/types/fimlsTypes";
 
 export default {
   name: "Films",
@@ -78,15 +78,14 @@ export default {
   },
 
   created() {
-    console.log({ cc: this.loading_films });
     if (!this.films.length) {
-      console.log("IndexFilms");
       this.getAllFilmsApi();
+    } else {
+      this.$store.commit(`filmsStore/${FILMS_LOADING}`, false);
     }
   },
   destroyed() {
     this.$store.commit(`filmsStore/${FILMS_ERROR}`, "");
-   console.log({ dd: this.loading_films })
   },
 };
 </script>

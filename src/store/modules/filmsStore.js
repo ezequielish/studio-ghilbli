@@ -28,7 +28,6 @@ const store = {
       state.films = payload
       state.error = ""
       state.loading_films = false
-      console.log({ state });
 
     },
     FILMS_LOADING(state, payload) {
@@ -129,7 +128,6 @@ const store = {
       }
     },
     async getAllFilmsApi({ commit }) {
-      console.log("filsStore");
       commit(FILMS_LOADING, true)
       try {
         const result = await fetch(URL_ALL_MOVIES);
