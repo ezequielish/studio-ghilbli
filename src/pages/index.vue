@@ -78,7 +78,7 @@ export default {
   },
 
   created() {
-    console.log({ dd: this.loading_films });
+    console.log({ cc: this.loading_films });
     if (!this.films.length) {
       console.log("IndexFilms");
       this.getAllFilmsApi();
@@ -86,6 +86,7 @@ export default {
   },
   destroyed() {
     this.$store.commit(`filmsStore/${FILMS_ERROR}`, "");
+   console.log({ dd: this.loading_films })
   },
 };
 </script>

@@ -28,6 +28,7 @@ const store = {
       state.films = payload
       state.error = ""
       state.loading_films = false
+      console.log({ state });
 
     },
     FILMS_LOADING(state, payload) {
