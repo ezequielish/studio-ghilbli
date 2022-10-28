@@ -128,6 +128,7 @@ const store = {
       }
     },
     async getAllFilmsApi({ commit }) {
+      console.log("filsStore");
       commit(FILMS_LOADING, true)
       try {
         const result = await fetch(URL_ALL_MOVIES);

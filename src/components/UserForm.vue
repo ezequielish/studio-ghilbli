@@ -82,9 +82,6 @@ export default {
     }
   },
   created() {
-    console.log({
-      ff: this.$route,
-    });
     if (this.$route.path == "/user") {
       this.typeForm = "user";
       const user =

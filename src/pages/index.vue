@@ -78,8 +78,8 @@ export default {
   },
 
   created() {
-
     if (!this.films.length) {
+      console.log("IndexFilms");
       this.getAllFilmsApi();
     }
   },
