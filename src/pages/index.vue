@@ -94,7 +94,9 @@ export default {
 <style scoped>
 section {
   padding: 15px;
-  height: 85vh;
+  /* height: 85vh; */
+  height: 90vh;
+  margin-bottom: 15px;
   overflow-y: scroll;
   background: #8e9eab; /* fallback for old browsers */
   background: -webkit-linear-gradient(

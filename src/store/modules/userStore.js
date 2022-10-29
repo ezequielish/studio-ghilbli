@@ -1,14 +1,16 @@
 
-const URL_USER_CREATE = process.env.baseUrl + "/user"
+const URL_USER = process.env.baseUrl + "/user"
 import {
     USER_ERROR,
-    USER_LOADING
+    USER_LOADING,
+    USER_DELETE_LOADING
 } from "../types/userTypes"
 const store = {
     namespaced: true,
     state: {
         userLoading: false,
-        userError: ""
+        userError: "",
+        userDelLoading: false
     },
     mutations: {
         USER_ERROR(state, payload) {
@@ -17,6 +19,9 @@ const store = {
         },
         USER_LOADING(state, payload) {
             state.userLoading = payload
+        },
+        USER_DELETE_LOADING(state, payload) {
+            state.userDelLoading = payload
         }
     },
     actions: {
@@ -46,7 +51,7 @@ const store = {
                     }
                 }
 
-                const result = await fetch(`${URL_USER_CREATE}`, objFetch);
+                const result = await fetch(`${URL_USER}`, objFetch);
                 const dataJson = await result.json();
                 if (dataJson.error) {
                     throw dataJson.message
@@ -65,6 +70,36 @@ const store = {
                 commit(USER_LOADING, false)
 
                 return false
+            }
+        },
+        async userDel({ commit }) {
+            try {
+                commit(USER_DELETE_LOADING, true)
+
+                const headers = new Headers();
+                if (window.localStorage.getItem("user_sg_token") != null) {
+                    headers.append("Authorization", `Bearer ${window.localStorage.getItem("user_sg_token")}`);
+                }
+
+                const result = await fetch(`${URL_USER}`, {
+                    method: "DELETE",
+                    headers
+                })
+                const dataJson = await result.json();
+
+                if (dataJson.error) {
+                    throw dataJson.message
+                } else {
+
+                    commit(USER_DELETE_LOADING, false)
+                    return dataJson.message
+                }
+
+            } catch (error) {
+
+                commit(USER_ERROR, error)
+                commit(USER_DELETE_LOADING, false)
+
             }
         }
     }

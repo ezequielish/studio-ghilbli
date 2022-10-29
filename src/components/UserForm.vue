@@ -51,9 +51,17 @@
 
       <button>
         <p v-if="userLoading">Loading...</p>
-        <p v-else>Sign in</p>
+        <p v-else>
+          <span>{{ typeForm == "user" ? "Update" : "Sign in" }}</span>
+        </p>
       </button>
     </form>
+    <button v-if="typeForm == 'user'" @click="deleteUser" class="btn-delete">
+      <p v-if="userDelLoading">Loading...</p>
+      <p v-else>
+        <span>Delete</span>
+      </p>
+    </button>
   </div>
 </template>
 <script>
@@ -72,7 +80,7 @@ export default {
     formSubmit: "",
   }),
   computed: {
-    ...mapState("userStore", ["userError", "userLoading"]),
+    ...mapState("userStore", ["userError", "userLoading", "userDelLoading"]),
   },
   beforeCreate() {
     if (this.$route.path == "/register") {
@@ -84,13 +92,16 @@ export default {
   created() {
     if (this.$route.path == "/user") {
       this.typeForm = "user";
-      const user =
-        localStorage.getItem("user_sg") &&
-        JSON.parse(localStorage.getItem("user_sg"));
 
-      this.name = user.name;
-      this.email = user.email;
-      this.formSubmit = this.editUser;
+      if (process.browser) {
+        const user =
+          window.localStorage.getItem("user_sg") &&
+          JSON.parse(localStorage.getItem("user_sg"));
+
+        this.name = user.name;
+        this.email = user.email;
+        this.formSubmit = this.editUser;
+      }
     }
     if (this.$route.path == "/register") {
       this.typeForm = "register";
@@ -134,6 +145,15 @@ export default {
             this.email = email;
           }
         });
+    },
+    deleteUser: async function () {
+      this.$store.dispatch("userStore/userDel").then((result) => {
+        if (result) {
+          this.$store.dispatch("authStore/logoutAuth").then(() => {
+            this.$router.push("/");
+          });
+        }
+      });
     },
     newUser: async function (ev) {
       ev.preventDefault();
@@ -209,6 +229,7 @@ export default {
   },
   destroyed() {
     this.$store.commit(`userStore/${USER_ERROR}`, "");
+    
   },
 };
 </script>
@@ -218,6 +239,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
 #form {
   display: flex;
@@ -273,7 +295,9 @@ button {
   color: whitesmoke;
   margin-bottom: 7px;
 }
-
+.btn-delete {
+  background: #cf3737;
+}
 button p {
   margin: 0;
 }

@@ -1,2 +1,3 @@
 export const USER_ERROR = "USER_ERROR";
 export const USER_LOADING = "USER_LOADING";
+export const USER_DELETE_LOADING = "USER_DELETE_LOADING";

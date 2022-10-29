@@ -64,7 +64,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"Studio Ghibli","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Studio Ghibli"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffav.png"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Bebas+Neue&family=Dosis&display=swap"}],"style":[],"script":[]},
+    head: {"title":"Studio Ghibli","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1.0"},{"hid":"description","name":"description","content":"Studio Ghibli"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffav.png"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Bebas+Neue&family=Dosis&display=swap"}],"style":[],"script":[]},
 
     store,
     router,

@@ -5,7 +5,7 @@ export default {
         title: "Studio Ghibli",
         meta: [
             { charset: "utf-8" },
-            { name: "viewport", content: "width=device-width, initial-scale=1" },
+            { name: "viewport", content: "width=device-width, initial-scale=1.0" },
             { hid: "description", name: "description", content: "Studio Ghibli" }
         ],
         link: [
@@ -17,12 +17,11 @@ export default {
         ]
     },
     env: {
-        baseUrl: process.env.BASE_URL || "http://localhost:3000"
+        baseUrl: "http://localhost:8000/api"
     },
     target: "static",
     generate: {
         fallback: true
     }
 }
-
 

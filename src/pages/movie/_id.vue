@@ -486,4 +486,14 @@ h2 {
     width: 55%;
   }
 }
+
+@media (min-width: 1000px) {
+  .movie-info-dp {
+    margin-top: -40px;
+  }
+  #img {
+    margin-top: -90px;
+    border: none;
+  }
+}
 </style>

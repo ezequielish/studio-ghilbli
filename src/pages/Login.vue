@@ -31,7 +31,7 @@
         <p v-else>Log in</p>
       </button>
 
-      <p>Dont' have an account? Sing in</p>
+      <NuxtLink to="/register">Dont' have an account? Sing in</NuxtLink>
     </form>
   </div>
 </template>
@@ -110,6 +110,11 @@ img {
   margin-top: 20px;
   box-shadow: 1px 4px 11px 4px rgb(0 0 0 / 13%);
   border-radius: 7px;
+}
+
+a {
+  text-decoration: none;
+  color: #1e6991;
 }
 
 #input-wrapper {
