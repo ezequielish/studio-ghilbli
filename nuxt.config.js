@@ -17,7 +17,7 @@ export default {
         ]
     },
     env: {
-        baseUrl: "http://localhost:8000/api"
+        baseUrl: process.env.BASE_URL || "http://localhost:8000/api"
     },
     target: "static",
     generate: {
