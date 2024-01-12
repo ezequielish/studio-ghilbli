@@ -71,7 +71,7 @@ nav {
       padding: var(--spacing-md);
       width: calc(100% - calc(var(--spacing-md) * 2));
       text-align: center;
-       grid-auto-flow: row;
+      grid-auto-flow: row;
     }
     li,
     span,
@@ -116,6 +116,7 @@ nav {
 @media (min-width: 700px) {
   nav {
     border-right: 1px solid var(--purple-5);
+    width: 12%;
   }
   .nav-title {
     display: flex !important;
