@@ -1,18 +1,46 @@
 
-import { LOADING_AUTH, ERROR_LOGIN, LOGOUT_AUTH, SET_USERNAME } from "../types/authTypes"
-
+import {
+    LOADING_AUTH,
+    ERROR_LOGIN,
+    LOGOUT_AUTH,
+    SET_SCOPE,
+    SET_EMAIL,
+    SET_TOKEN,
+    SET_NAME,
+    SET_INPUT,
+} from "../types/authTypes"
 const url = process.env.baseUrl + "/login"
+import fetchMethods from "../../utils/fetchMethods"
 
 const store = {
     namespaced: true,
     state: {
         scope: [],
-        username: "",
+        email: "",
+        name: "",
         apiToken: null,
         loading: false,
-        error: ""
+        error: "",
+        inputs: {
+            email: {
+                id: "email",
+                type: "email",
+                placeholder: "Enter your email",
+                required: true,
+                label: "Email",
+                value: "",
+            },
+            password: {
+                id: "password",
+                type: "password",
+                placeholder: "*******",
+                required: true,
+                label: "Password",
+                value: "",
+                showPassword: true
+            },
+        },
     },
-
     mutations: {
 
         LOADING_AUTH(state, payload) {
@@ -21,25 +49,35 @@ const store = {
 
         ERROR_LOGIN(state, payload) {
             state.error = payload
+            state.loading = false
         },
-        LOGOUT_AUTH() {
+        LOGOUT_AUTH(state) {
             if (process.browser) {
-                localStorage.removeItem("user_sg")
+                localStorage.removeItem("email_sg")
                 localStorage.removeItem("user_sg_scope")
                 localStorage.removeItem("user_sg_token")
+                localStorage.removeItem("user_sg_name")
             }
-
+            state.username = ""
+            state.email = ""
+            state.apiToken = null
+            state.scope = []
         },
-        SET_USERNAME(state) {
-            if (process.browser && localStorage.getItem("user_sg") != null) {
-                const user = JSON.parse(localStorage.getItem("user_sg"));
-                // eslint-disable-next-line no-prototype-builtins
-                state.username = user.hasOwnProperty("name") ? user.name : "";
-            } else {
-                state.username = "";
-            }
-        }
-
+        SET_EMAIL(state, payload) {
+            state.email = payload
+        },
+        SET_TOKEN(state, payload) {
+            state.apiToken = payload
+        },
+        SET_SCOPE(state, payload) {
+            state.scope = payload
+        },
+        SET_NAME(state, payload) {
+            state.name = payload
+        },
+        SET_INPUT(state, payload) {
+            state.inputs[payload.key].value = payload.value
+        },
     },
     getters: {
         getError: state => () => {
@@ -48,60 +86,69 @@ const store = {
         getUsername: state => () => {
             return state.username
         },
+        structureBodyFormAuth: () => inputs => {
+            const { email, password } = inputs
+            const auth = Buffer.from(email.value + ":" + password.value).toString("base64")
+            return auth
+        }
     },
     actions: {
 
-        setUsername({ commit }) {
-            commit(SET_USERNAME)
-        },
         logoutAuth({ commit }) {
             commit(LOGOUT_AUTH)
         },
-        async sign({ commit }, user) {
+        async sign({ commit, getters, state }) {
 
             commit(LOADING_AUTH, true)
-            commit(ERROR_LOGIN, "")
-
             try {
-
+                const formValues = state.inputs
+                const auth = getters.structureBodyFormAuth(formValues)
                 let headers = new Headers();
-                const auth = Buffer.from(user.user + ":" + user.pass).toString("base64")
-
                 headers.append("Authorization", `Basic ${auth}`);
-
-
-                let request = await fetch(url, {
-                    headers,
-                    method: "POST"
-                });
-
-                const dataJson = await request.json();
-
-                if (dataJson.error) {
-                    throw dataJson.message
+                const fetchConfig = {
+                    method: "POST",
+                    headers
                 }
+
+                let result = await fetchMethods().send(url, fetchConfig)
 
                 if (process.browser) {
-                    localStorage.setItem("user_sg", JSON.stringify(dataJson.data.user))
-                    localStorage.setItem("user_sg_scope", JSON.stringify(dataJson.data.scope))
-                    localStorage.setItem("user_sg_token", dataJson.data.token)
+                    localStorage.setItem("email_sg", JSON.stringify(result.user.email))
+                    localStorage.setItem("user_sg_scope", JSON.stringify(result.scope))
+                    if (result.token != "") { localStorage.setItem("user_sg_token", JSON.stringify(result.token)) }
+
+                    localStorage.setItem("user_sg_name", JSON.stringify(result.user.name))
                 }
 
-                commit(LOADING_AUTH, false)
+                commit(ERROR_LOGIN, "")
+                if (result.token != "") { commit(SET_TOKEN, result.token) }
+                commit(SET_SCOPE, result.scope)
+                commit(SET_EMAIL, result.user.email)
+                commit(SET_NAME, result.user.name)
 
                 return true
-
             } catch (error) {
                 commit(ERROR_LOGIN, error)
-                commit(LOADING_AUTH, false)
-
-                return false
             }
 
-        }
+        },
+        setUserData({ commit }) {
+            const name = JSON.parse(localStorage.getItem("user_sg_name")) || ""
+            const email = JSON.parse(localStorage.getItem("email_sg")) || ""
+            commit(SET_NAME, name)
+            commit(SET_EMAIL, email)
+        },
+        setInputValue({ commit }, input) {
+            input.forEach(element => {
+                commit(SET_INPUT, element)
+            });
+        },
+        resetInputValues({ commit, state }) {
+            Object.keys(state.inputs).forEach(key => {
+                commit(SET_INPUT, { key, value: "" })
+            })
+        },
     }
-
-
 }
 
 

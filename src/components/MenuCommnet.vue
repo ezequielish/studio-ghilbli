@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import MenuComment from "../assets/menucomment.png";
+// import MenuComment from "../assets/menucomment.png";
 import { mapActions, mapState } from "vuex";
 import swal from "sweetalert";
 
@@ -36,7 +36,7 @@ export default {
     commentId: Number,
   },
   data: () => ({
-    menuComment: MenuComment,
+    // menuComment: MenuComment,
     showMenu: false,
     loading_comment_del: false,
   }),

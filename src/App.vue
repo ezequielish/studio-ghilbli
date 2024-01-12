@@ -8,15 +8,12 @@
 </template>
 
 <script>
-
 export default {
   name: "App",
-
 };
 </script>
 
 <style>
-
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -24,7 +21,6 @@ export default {
   text-align: center;
   margin: 0;
   padding: 0;
-
 }
 
 .material-symbols-outlined-fill {

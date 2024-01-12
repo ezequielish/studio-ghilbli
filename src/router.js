@@ -26,7 +26,7 @@ export default new Router({
         {
             path: "/",
             name: "home",
-            component: () => import("./components/Films.vue")// de esta forma importamos nuestros componentes en lazy loading
+            component: () => import("./components/Films.vue")
         },
         {
             path: "/favorites",

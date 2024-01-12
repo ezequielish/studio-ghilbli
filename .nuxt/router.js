@@ -3,7 +3,9 @@ import Router from 'vue-router'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
+const _5697f0de = () => interopDefault(import('../src/pages/Favorites.vue' /* webpackChunkName: "pages/Favorites" */))
 const _1494ac70 = () => interopDefault(import('../src/pages/Login.vue' /* webpackChunkName: "pages/Login" */))
+const _3f2c751d = () => interopDefault(import('../src/pages/MostPopular.vue' /* webpackChunkName: "pages/MostPopular" */))
 const _80c05328 = () => interopDefault(import('../src/pages/Register.vue' /* webpackChunkName: "pages/Register" */))
 const _de267fd8 = () => interopDefault(import('../src/pages/User.vue' /* webpackChunkName: "pages/User" */))
 const _05a8a9fc = () => interopDefault(import('../src/pages/movie/_id.vue' /* webpackChunkName: "pages/movie/_id" */))
@@ -26,9 +28,17 @@ export const routerOptions = {
   scrollBehavior,
 
   routes: [{
+    path: "/Favorites",
+    component: _5697f0de,
+    name: "Favorites"
+  }, {
     path: "/Login",
     component: _1494ac70,
     name: "Login"
+  }, {
+    path: "/MostPopular",
+    component: _3f2c751d,
+    name: "MostPopular"
   }, {
     path: "/Register",
     component: _80c05328,

@@ -1,15 +1,16 @@
 import Vue from 'vue'
 
 import { getMatchedComponentsInstances, getChildrenComponentInstancesUsingFetch, promisify, globalHandleError, urlJoin, sanitizeComponent } from './utils'
-
+import NuxtError from '../src/layouts/error.vue'
 import NuxtLoading from './components/nuxt-loading.vue'
 import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
 import '../src/assets/main.css'
 
+import _0facb547 from '../src/layouts/WrapperLayout.vue'
 import _6f6c098b from './layouts/default.vue'
 
-const layouts = { "_default": sanitizeComponent(_6f6c098b) }
+const layouts = { "_WrapperLayout": sanitizeComponent(_0facb547),"_default": sanitizeComponent(_6f6c098b) }
 
 export default {
   render (h, props) {
@@ -94,10 +95,6 @@ export default {
 
     isFetching () {
       return this.nbFetching > 0
-    },
-
-    isPreview () {
-      return Boolean(this.$options.previewData)
     },
   },
 

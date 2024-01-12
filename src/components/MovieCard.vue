@@ -1,19 +1,32 @@
 
 <template>
-  <div class="frame-movie" :style="backgroundCard(this.image)">
-    <router-link :to="`movie/${id}`">
-      <h2>{{ title }}</h2>
-      <div class="movie-info">
-        <div class="movie-info-time">
-          <span class="material-symbols-outlined timer-icon"> alarm </span>
-          <span>{{ hour }}h {{ minutes }}m</span>
-        </div>
-        <div class="star-container">
-          <StarScore :score="parseInt(score)" />
+  <router-link :to="{ path: `movie/${id}`, meta: 's' }">
+    <div class="wrapper-movie">
+      <figure>
+        <img
+          :src="image"
+          @load="onImgLoad"
+          loading="lazy"
+          :class="{ 'img-active': isLoaded }"
+        />
+      </figure>
+      <div class="wrapper-movie__info">
+        <p>{{ release_date }}</p>
+        <h3>{{ title }}</h3>
+        <div class="wrapper-movie__info__row">
+          <div class="wrapper-movie__info__row__time">
+            <span class="material-symbols-outlined timer-icon"> alarm </span>
+            <span class="wrapper-movie__info__row__time__hour"
+              >{{ hour }}h {{ minutes }}m</span
+            >
+          </div>
+          <div class="wrapper-movie__info__row__star">
+            <StarScore :score="parseInt(score)" />
+          </div>
         </div>
       </div>
-    </router-link>
-  </div>
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -24,19 +37,20 @@ export default {
   data: () => ({
     hour: 0,
     minutes: 0,
+    isLoaded: false,
   }),
   props: {
     index: Number,
     id: String,
     title: String,
     running_time: String,
+    release_date: String,
     score: String,
     description: String,
     director: String,
     producer: String,
     date: String,
     image: String,
-    handleText: Function,
     handleLikeMovie: Function,
     handleImgLike: Function,
   },
@@ -53,6 +67,9 @@ export default {
         return "0" + number;
       }
       return number;
+    },
+    onImgLoad() {
+      this.isLoaded = true;
     },
   },
 
@@ -78,63 +95,108 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.frame-movie {
-  margin-bottom: 15px;
-  object-fit: cover;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  border-radius: 6px;
-  box-shadow: 4px 37px 70px -58px rgba(0, 0, 0, 0.65);
-  -webkit-box-shadow: 4px 37px 70px -58px rgba(0, 0, 0, 0.65);
-  -moz-box-shadow: 4px 37px 70px -58px rgba(0, 0, 0, 0.65);
-}
-
-.frame-movie a {
-  font-family: "Dosis", sans-serif;
+<style scoped lang="scss">
+a {
   text-decoration: none;
-  color: #2d3e4f;
-  width: 260px;
-  min-width: 260px;
-  box-shadow: 0px 5px 9px rgba(0, 0, 0, 0.6);
-  height: 365px;
-  display: grid;
-  grid-template-rows: 20% 50% 30%;
-  cursor: pointer;
-  transition: 0.4s;
-  box-shadow: 1px -220px 130px -38px rgba(0, 0, 0, 0.75) inset;
-  -webkit-box-shadow: 1px -220px 130px -38px rgba(0, 0, 0, 0.75) inset;
-  -moz-box-shadow: 1px -220px 130px -38px rgba(0, 0, 0, 0.75) inset;
-  position: relative;
-  border-radius: 6px;
-}
+  color: var(--purple-3);
+  font-weight: 600;
+  .wrapper-movie {
+    display: flex;
+    align-items: flex-end;
+    @media (min-width: 1000px) {
+      &:hover {
+        box-shadow: var(--shadow-elevation-large);
+        background: var(--purple-9);
+        border-radius: var(--border-radius-lg-xs) var(--border-radius-sm) var(--border-radius-sm)  var(--border-radius-lg-xs);
+        // padding: var(--spacing-sm);
+        transition: 0.3s all;
+      }
+    }
 
-.frame-movie h2 {
-  position: absolute;
-  bottom: 45px;
-  color: white;
-  font-size: 1.2em;
-  margin-left: 25px;
-  opacity: 0.8;
-}
+    figure {
+      width: 95px;
+      height: 120px;
+      margin: 0%;
+      padding: 0%;
+      background: var(--purple-6);
+      border-radius: var(--spacing-sm-xl);
 
-.movie-info .movie-info-time {
-  color: white;
-  font-size: 0.9em;
-  position: absolute;
-  bottom: 35px;
-  display: flex;
-  align-items: center;
-  left: 147px;
-}
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        aspect-ratio: 1/1;
+        border-radius: inherit;
+        opacity: 0;
+        transition: opacity 0.6s;
+        box-shadow: var(--shadow-elevation-medium);
+      }
 
-.movie-info .movie-info-time .timer-icon {
-  font-size: 1.2em;
-}
+      .img-active {
+        opacity: 1;
+      }
+    }
 
-.star-container {
-  position: absolute;
-  bottom: 30px;
-  left: 22px;
+    &__info {
+      width: 65%;
+      padding: var(--spacing-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      p {
+        margin: 0;
+        font-size: calc(var(--font-movil) - 0.8rem);
+        font-weight: 600;
+        margin-bottom: var(--spacing-sm-xs);
+        color: var(--purple-4);
+
+        @media (min-width: 700px) {
+          font-size: calc(var(--font-movil) - 0.9rem);
+        }
+      }
+      h3 {
+        font-size: calc(var(--font-movil) - 0.3rem);
+        margin-bottom: var(--spacing-sm);
+        letter-spacing: var(--spacing-letter-xxs);
+        text-shadow: var(--text-shadow);
+
+        @media (min-width: 700px) {
+          font-size: calc(var(--font-movil) - 0.5rem);
+        }
+      }
+
+      &__row {
+        display: flex;
+        justify-content: space-between;
+
+        &__time {
+          display: flex;
+          align-items: center;
+
+          span {
+            font-size: calc(var(--font-movil) - 0.9rem);
+            letter-spacing: var(--spacing-letter-xs);
+            font-weight: 600;
+          }
+
+          &__hour {
+            font-size: calc(var(--font-movil) - 0.9rem);
+            margin-left: var(--spacing-sm-xs);
+          }
+        }
+
+        &__star {
+          font-size: calc(var(--font-movil) - 0.9rem);
+          color: #bb991f;
+          font-weight: 500;
+
+          @media (min-width: 700px) {
+            font-size: calc(var(--font-movil) - 1rem);
+          }
+        }
+      }
+    }
+  }
 }
 </style>

@@ -1,10 +1,24 @@
 [
   {
+    "name": "Favorites",
+    "path": "/Favorites",
+    "component": "/home/ezequiel/development/studio-ghilbli/src/pages/Favorites.vue",
+    "chunkName": "pages/Favorites",
+    "_name": "_5697f0de"
+  },
+  {
     "name": "Login",
     "path": "/Login",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/Login.vue",
     "chunkName": "pages/Login",
     "_name": "_1494ac70"
+  },
+  {
+    "name": "MostPopular",
+    "path": "/MostPopular",
+    "component": "/home/ezequiel/development/studio-ghilbli/src/pages/MostPopular.vue",
+    "chunkName": "pages/MostPopular",
+    "_name": "_3f2c751d"
   },
   {
     "name": "Register",
