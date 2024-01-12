@@ -1,9 +1,18 @@
 <template>
-  <ul>
-    <li v-for="(item, index) in this.star" :key="index">
-      <img :src="item" />
-    </li>
-  </ul>
+  <div>
+    <ul v-if="this.size">
+      <span class="score">{{ (this.score * 5) / 100 }}</span>
+      <li v-for="(item, index) in this.star" :key="index">
+        <img :src="item" alt="icono de estrella" class="img--large" />
+      </li>
+    </ul>
+    <ul v-else>
+      <li>
+        <img :src="starfull" alt="icono de estrella" class="img--small" />
+        {{ (this.score * 10) / 100 }}<span>({{ this.score }})</span>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -15,9 +24,11 @@ export default {
   name: "StarScore",
   data: () => ({
     star: [],
+    starfull: StarFull,
   }),
   props: {
     score: Number,
+    size: Boolean,
   },
 
   created() {
@@ -69,12 +80,35 @@ export default {
 <style scoped>
 ul {
   display: flex;
+  align-items: center;
   list-style: none;
   padding: 0;
   margin: 0;
 }
-img {
-  height: 20px;
+
+ul .score {
+  font-weight: 700;
+  color: var(--purple-4);
+  margin-right: var(--spacing-sm-xs);
+  margin-top: var(--spacing-sm-xs);
+}
+ul li {
+  display: flex;
+  align-items: center;
+}
+
+ul li span {
+  color: var(--purple-4);
+  margin-left: var(--spacing-sm-xs);
+}
+
+.img--small {
+  width: 15px;
+  height: 15px;
+}
+
+.img--large {
   width: 20px;
+  height: 20px;
 }
 </style>

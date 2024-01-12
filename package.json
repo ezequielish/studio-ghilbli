@@ -12,22 +12,30 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "babel-loader": "^8.2.5",
+    "@babel/plugin-proposal-private-methods": "7.18.6",
+    "@nuxt/telemetry": "1.3.7",
+    "babel-loader": "8.2.5",
+    "cookie-universal-nuxt": "^2.2.2",
     "core-js": "3.6.4",
-    "nuxt": "^2.14.4",
-    "sweetalert": "^2.1.2",
+    "hammerjs": "^2.0.8",
+    "nuxt": "2.14.4",
+    "sweetalert": "2.1.2",
     "vue": "2.6.11",
     "vue-router": "3.1.6",
-    "vue-server-renderer": "^2.6.11",
+    "vue-server-renderer": "2.6.11",
+    "vue2-touch-events": "^3.2.3",
     "vuex": "3.1.3"
   },
   "devDependencies": {
+    "@babel/preset-env": "7.12.17",
     "@vue/cli-plugin-babel": "4.3.0",
     "@vue/cli-plugin-eslint": "4.3.0",
     "@vue/cli-service": "4.3.0",
     "babel-eslint": "10.1.0",
     "eslint": "6.7.2",
     "eslint-plugin-vue": "6.2.2",
+    "sass": "1.68.0",
+    "sass-loader": "10.4.1",
     "vue-template-compiler": "2.6.11"
   },
   "eslintConfig": {

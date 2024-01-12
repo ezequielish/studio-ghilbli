@@ -1,4 +1,9 @@
 export const LOADING_AUTH = "LOADING_AUTH";
 export const ERROR_LOGIN = "ERROR_LOGIN";
 export const LOGOUT_AUTH = "LOGOUT_AUTH";
-export const SET_USERNAME = "SET_USERNAME";
+export const SET_SCOPE = "SET_SCOPE";
+export const SET_EMAIL = "SET_EMAIL";
+export const SET_TOKEN = "SET_TOKEN";
+export const SET_NAME = "SET_NAME";
+export const SET_INPUT = "SET_INPUT";
+export const SET_TYPE_INPUT_PASSWORD = "SET_TYPE_INPUT_PASSWORD";

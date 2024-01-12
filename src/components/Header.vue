@@ -1,129 +1,237 @@
 <template>
   <header>
-    <figure id="logo">
-      <NuxtLink to="/"> <img :src="logo" /> </NuxtLink>
-    </figure>
-
-    <div id="info-user">
-      <div v-if="username != ''">
-        <p>{{ username }}</p>
-        <NuxtLink to="/user">
-          <img :src="profileImg" id="profile-img" />
-        </NuxtLink>
-        <button v-on:click="handleLogout">
-          <img :src="logout" width="14px" />
-        </button>
-      </div>
-      <div v-else>
-        <NuxtLink to="/login">log in </NuxtLink>
-        <NuxtLink to="/register">sign in </NuxtLink>
-      </div>
+    <div class="mini-header">
+      <ul>
+        <li v-if="!routeMinHeader.includes(this.$router.app._route.name)">
+          <FromInputs
+            :inputs="inputs"
+            class="wrapper-inputs"
+            :value="inputs['search_movie'].value"
+            @keyup="handleSearchMovie"
+            @change="handleSearchMovie"
+            @blur="handleSearchMovie"
+            :loader="false"
+            :strongBtn="false"
+            ref="_form"
+            id="form_search_movie"
+            :autocomplete="false"
+          />
+        </li>
+        <li
+          v-if="routeMinHeader.includes(this.$router.app._route.name)"
+          class="prev-navigation"
+        >
+          <button @click="handleToBack"><ArrowLeftIcon /></button>
+        </li>
+        <li class="session">
+          <Button
+            :strong="true"
+            :handleBtn="handleSession"
+            :text="
+              this.$cookies.get('token_api') != null ||
+              this.$cookies.get('token_api') != undefined
+                ? 'log out'
+                : 'Log in'
+            "
+          />
+        </li>
+        <li>
+          <button @click="handleAparence">
+            <img
+              :src="this.aparence == 'light' ? DarkAparence : LightAparence"
+              alt="dark mode"
+              width="45px"
+              height="45px"
+            />
+          </button>
+        </li>
+      </ul>
     </div>
+    <Navbar />
   </header>
 </template>
 
 
 <script>
+import Button from "./Buttons/Button.vue";
+import Navbar from "../components/Navbar.vue";
 import Logo from "../assets/studig.png";
-import Logout from "../assets/logout.png";
-import ProfileImg from "../assets/profile.jpg";
-import { mapState, mapActions } from "vuex";
+import DarkAparence from "../assets/calcifer-dark.png";
+import LightAparence from "../assets/calcifer-light.png";
+import FromInputs from "../components/forms/Inputs.vue";
+import ArrowLeftIcon from "./icons/arrow_left-icon.vue";
+
+import { mapActions, mapState } from "vuex";
+
 export default {
   name: "Header",
+  components: {
+    ArrowLeftIcon,
+    Navbar,
+    FromInputs,
+    Button,
+  },
   data: () => ({
     menuHandle: false,
     resultSearch: [],
+    showSearch: false,
+    routeMinHeader: ["User", "movie-id", "MostPopular"],
     logo: Logo,
-    profileImg: ProfileImg,
-    logout: Logout,
+    DarkAparence,
+    LightAparence,
   }),
-
   computed: {
-    ...mapState("authStore", ["username"]),
-  },
-  created() {
-    this.$store.dispatch("authStore/setUsername");
+    ...mapActions("authStore", ["logoutAuth", "setUsername"]),
+    ...mapState("appStore", ["aparence"]),
+    ...mapState("filmsStore", ["films", "inputs"]),
+    serchMovie() {
+      return this.inputs["search_movie"].value;
+    },
   },
   methods: {
-    handleLogout: function () {
-      this.$store.dispatch("authStore/logoutAuth");
-      setTimeout(() => {
-        this.$store.dispatch("authStore/setUsername");
-      }, 500);
+    handleSearch: function (ev) {
+      const value = ev.target.value;
+      this.$store.dispatch("filmsStore/changeValueSearch", value);
     },
-    ...mapActions("authStore", ["logoutAuth", "setUsername"]),
+    handleAparence: function () {
+      this.$store.dispatch(
+        "appStore/setAparence",
+        this.aparence == "light" ? "dark" : "light"
+      );
+    },
+    handleSession: function () {
+      if (
+        this.$cookies.get("token_api") == null ||
+        this.$cookies.get("token_api") == undefined
+      ) {
+        this.$router.push("/login");
+      } else {
+        this.$cookies.set("token_api", null);
+        this.$store.dispatch("authStore/logoutAuth");
+        this.$router.push("/");
+      }
+    },
+    handleSearchMovie: function (ev) {
+      const id = ev.target.id;
+      const value = ev.target.value;
+      if (Object.hasOwn(this.inputs, id)) {
+        const payload = {
+          key: id,
+          value: value,
+        };
+        this.$store
+          .dispatch("filmsStore/setInputSearchMovieValue", payload)
+          .then();
+      }
+    },
+    handleToBack: function () {
+      this.$router.push("/");
+    },
+  },
+  watch: {
+    serchMovie() {
+      if (
+        this.inputs["search_movie"].value.length > 2 &&
+        this.films.length > 0
+      ) {
+        const movies = this.$store.getters["filmsStore/searchFilms"](
+          this.inputs["search_movie"].value
+        );
+        this.$store.dispatch("filmsStore/setSearchMovieFilter", movies).then();
+      }
+
+      if (this.inputs["search_movie"].value.length < 2) {
+        this.$store.dispatch("filmsStore/setSearchMovieFilter", []).then();
+      }
+    },
   },
 };
 </script>
 
 <style  scoped>
 header {
-  height: 50px;
-  display: flex;
-  align-items: center;
-  padding: 7px;
-  justify-content: space-between;
-}
-#logo {
-  padding: 0;
-  margin: 0;
-  height: 65px;
-  width: 65px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#logo a {
-  display: flex;
-}
-#logo img {
+  height: var(--height-header);
   width: 100%;
-  border-radius: 7px;
+}
+header nav {
+  background-color: var(--background-header);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
 }
 
-#info-user {
-  padding-right: 7px;
-  font-size: 1.2em;
+.prev-navigation {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+}
+.prev-navigation button {
+  cursor: pointer;
+}
+
+.mini-header {
+  width: calc(100% - var(--spacing-md));
+  height: calc(var(--height-header) - var(--spacing-md));
+  position: fixed;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-shadow: var(--shadow-elevation-large);
+  padding: var(--spacing-sm);
+  background-color: var(--background-miniheader);
+  z-index: 2;
+}
+
+.mini-header .session {
+  width: 115px;
+}
+.mini-header .session button {
+  padding: var(--spacing-sm);
+  background: var(--purple-5);
+  color: var(--purple-9);
+}
+.mini-header ul {
   display: flex;
   align-items: center;
-}
-#info-user div {
-  display: flex;
-  align-items: center;
-}
-
-#info-user p {
-  margin-right: 14px;
-  font-family: "Dosis", system-ui;
-}
-#info-user a {
-  margin-right: 14px;
-  font-family: "Dosis", system-ui;
-  text-decoration: none;
-  color: black;
-  font-size: 1.2em;
+  gap: var(--spacing-md-xs);
+  position: relative;
+  width: calc(100% - calc(calc(var(--spacing-sm) * 2)) + var(--spacing-md-xs));
+  justify-content: flex-end;
 }
 
-#info-user button {
+.mini-header button {
   background: none;
   border: none;
-  margin-top: 7px;
-}
-
-.buttom-profile-img {
-  padding: 0;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  background: none;
   outline: none;
 }
-#profile-img {
-  width: 35px;
-  height: 35px;
-  object-fit: cover;
-  border-radius: 16px;
-  margin-right: 14px;
+
+.mini-header button img {
+  background: none;
+  border: none;
+  width: 45px;
+  height: 45px;
+}
+@media (min-width: 700px) {
+  header {
+    top: 0;
+    left: 0;
+    width: 12%;
+    height: 100%;
+  }
+  .mini-header {
+    width: 88%;
+  }
+  nav {
+    width: 12%;
+  }
+}
+
+@media (max-width: 1000px) and (orientation: landscape) {
+  header .mini-header {
+    height: 11vh;
+  }
 }
 </style>

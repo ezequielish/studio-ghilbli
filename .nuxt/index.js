@@ -5,13 +5,15 @@ import ClientOnly from 'vue-client-only'
 import NoSsr from 'vue-no-ssr'
 import { createRouter } from './router.js'
 import NuxtChild from './components/nuxt-child.js'
-import NuxtError from './components/nuxt-error.vue'
+import NuxtError from '../src/layouts/error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
 import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 import { createStore } from './store.js'
 
 /* Plugins */
+
+import nuxt_plugin_cookieuniversalnuxt_ae618ebc from 'nuxt_plugin_cookieuniversalnuxt_ae618ebc' // Source: ./cookie-universal-nuxt.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -64,7 +66,7 @@ async function createApp(ssrContext, config = {}) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"Studio Ghibli","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Studio Ghibli"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffav.png"}],"style":[],"script":[]},
+    head: {"title":"Studio Ghibli","meta":[{"charset":"utf-8"},{"lang":"es"},{"name":"viewport","content":"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"},{"hid":"description","name":"description","content":"Studio Ghibli - Movies"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffav.png"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Bebas+Neue&family=Dosis&display=swap"},{"rel":"stylesheet","href":"https:\u002F\u002Ffonts.googleapis.com\u002Fcss2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"}],"script":[{"src":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Fhammer.js\u002F2.0.8\u002Fhammer.min.js"}],"style":[]},
 
     store,
     router,
@@ -192,6 +194,10 @@ async function createApp(ssrContext, config = {}) {
     }
   }
   // Plugin execution
+
+  if (typeof nuxt_plugin_cookieuniversalnuxt_ae618ebc === 'function') {
+    await nuxt_plugin_cookieuniversalnuxt_ae618ebc(app.context, inject)
+  }
 
   // Lock enablePreview in context
   if (process.static && process.client) {
