@@ -30,7 +30,7 @@ export default {
         middleware: ["redirectRoute"]
     },
     env: {
-        baseUrl: "http://localhost:8000/api",
+        baseUrl: process.env.VUE_APP_URL_PROD,
         baseLocal: "http://192.168.50.24:3100/",
     },
     target: "server",

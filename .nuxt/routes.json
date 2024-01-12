@@ -3,49 +3,42 @@
     "name": "Favorites",
     "path": "/Favorites",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/Favorites.vue",
-    "chunkName": "pages/Favorites",
-    "_name": "_5697f0de"
+    "chunkName": "pages/Favorites"
   },
   {
     "name": "Login",
     "path": "/Login",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/Login.vue",
-    "chunkName": "pages/Login",
-    "_name": "_1494ac70"
+    "chunkName": "pages/Login"
   },
   {
     "name": "MostPopular",
     "path": "/MostPopular",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/MostPopular.vue",
-    "chunkName": "pages/MostPopular",
-    "_name": "_3f2c751d"
+    "chunkName": "pages/MostPopular"
   },
   {
     "name": "Register",
     "path": "/Register",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/Register.vue",
-    "chunkName": "pages/Register",
-    "_name": "_80c05328"
+    "chunkName": "pages/Register"
   },
   {
     "name": "User",
     "path": "/User",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/User.vue",
-    "chunkName": "pages/User",
-    "_name": "_de267fd8"
+    "chunkName": "pages/User"
   },
   {
     "name": "movie-id",
     "path": "/movie/:id?",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/movie/_id.vue",
-    "chunkName": "pages/movie/_id",
-    "_name": "_05a8a9fc"
+    "chunkName": "pages/movie/_id"
   },
   {
     "name": "index",
     "path": "/",
     "component": "/home/ezequiel/development/studio-ghilbli/src/pages/index.vue",
-    "chunkName": "pages/index",
-    "_name": "_590a2d0e"
+    "chunkName": "pages/index"
   }
 ]
