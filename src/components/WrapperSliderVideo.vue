@@ -19,6 +19,7 @@
           :src="item.movie_banner"
           :class="{ 'img-active': isLoaded, 'img-radius': borderRadius }"
           @load="onImgLoad(index)"
+          :alt="item.title"
         />
         <div
           class="wrapper__backdrop"
@@ -34,7 +35,7 @@
                 class="stars-wrapper"
               />
             </div>
-            <button @click="handleClickVideo" v-if="item.title">
+            <button name="button" @click="handleClickVideo" v-if="item.title">
               <PlayIcon />
             </button>
           </div>

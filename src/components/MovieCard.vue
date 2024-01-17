@@ -8,6 +8,7 @@
           @load="onImgLoad"
           loading="lazy"
           :class="{ 'img-active': isLoaded }"
+          :alt="title"
         />
       </figure>
       <div class="wrapper-movie__info">

@@ -36,7 +36,11 @@
           />
         </li>
         <li>
-          <button @click="handleAparence">
+          <button
+            id="calcifer"
+            @click="handleAparence"
+            alt="calcifer appearance"
+          >
             <img
               :src="this.aparence == 'light' ? DarkAparence : LightAparence"
               alt="dark mode"
@@ -190,8 +194,8 @@ header nav {
 }
 .mini-header .session button {
   padding: var(--spacing-sm);
-  background: var(--purple-5);
-  color: var(--purple-9);
+  background: var(--purple-3);
+  color: var(--background);
 }
 .mini-header ul {
   display: flex;
@@ -207,7 +211,9 @@ header nav {
   border: none;
   outline: none;
 }
-
+#calcifer {
+  cursor: pointer;
+}
 .mini-header button img {
   background: none;
   border: none;

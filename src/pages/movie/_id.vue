@@ -52,22 +52,18 @@
             class="wrapper__movie__info__people"
             v-if="Object.keys(filmSelected).length"
           >
-            <div
-              v-if="this.director_producer.length > 0"
-              class="wrapper__movie__info__people-director"
-            >
+            <div class="wrapper__movie__info__people-director">
               <h4>Directors</h4>
               <ListOfImagesPeople
                 :peoples="director_producer_exist('director')"
+                :loading="this.loadingDirectorsProducers"
               />
             </div>
-            <div
-              v-if="this.director_producer.length > 0"
-              class="wrapper__movie__info__people-producer"
-            >
+            <div class="wrapper__movie__info__people-producer">
               <h4>Producers</h4>
               <ListOfImagesPeople
                 :peoples="director_producer_exist('producer')"
+                :loading="this.loadingDirectorsProducers"
               />
             </div>
           </div>
@@ -164,7 +160,10 @@ export default {
     ]),
     ...mapState("authStore", ["username"]),
     ...mapState("appStore", ["aparence"]),
-    ...mapState("producersDirectorsStore", ["director_producer"]),
+    ...mapState("producersDirectorsStore", [
+      "director_producer",
+      "loadingDirectorsProducers",
+    ]),
 
     handleShortText: function () {
       return (text) => {
@@ -184,7 +183,6 @@ export default {
         const result = this.$store.getters[
           "producersDirectorsStore/getPersonByIdMovie"
         ](this.filmSelected.id);
-        console.log(result[`${type}`] );
         return Object.hasOwn(result, `${type}`) ? result[`${type}`] : "";
       };
     },

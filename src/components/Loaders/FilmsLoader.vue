@@ -26,7 +26,7 @@ export default {
     width: 95px;
     height: 120px;
     border-radius: var(--spacing-sm-xl);
-    background: var(--color-light-2);
+    background: var(--purple-4);
     box-shadow: var(--shadow-elevation-medium);
   }
   &__info {
@@ -40,21 +40,21 @@ export default {
       width: 35px;
       margin-bottom: var(--spacing-sm-xs);
       border-radius: var(--spacing-sm-xl);
-      background: var(--color-light-3);
+      background: var(--purple-4);
     }
     &-title {
       height: 12px;
       width: 115px;
       margin-bottom: var(--spacing-sm);
       border-radius: var(--spacing-sm-xl);
-      background: var(--color-light-3);
+      background: var(--purple-4);
     }
 
     &-time {
       height: 10px;
       width: 50px;
       border-radius: var(--spacing-sm-xl);
-      background: var(--color-light-3);
+      background: var(--purple-4);
     }
   }
 }
