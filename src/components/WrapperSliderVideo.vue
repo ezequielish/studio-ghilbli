@@ -35,7 +35,13 @@
                 class="stars-wrapper"
               />
             </div>
-            <button name="button" @click="handleClickVideo" v-if="item.title">
+            <button
+              name="play"
+              aria-label="play"
+              title="play"
+              @click="handleClickVideo"
+              v-if="item.title"
+            >
               <PlayIcon />
             </button>
           </div>
@@ -61,7 +67,8 @@
           :height="video.screen.height"
           :class="{ 'frame-radius': borderRadius }"
           :src="
-            'https://www.youtube.com/embed/' + getMovieInfo(item) || '' + video.ytAutoPlay
+            'https://www.youtube.com/embed/' + getMovieInfo(item) ||
+            '' + video.ytAutoPlay
           "
           title="YouTube video player"
           frameborder="0"

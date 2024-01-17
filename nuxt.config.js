@@ -3,6 +3,9 @@ export default {
     css: ["~/assets/main"],
     head: {
         title: "Studio Ghibli",
+        htmlAttrs: {
+            lang: "en",
+        },
         meta: [
             { charset: "utf-8" },
             { lang: "es" },
